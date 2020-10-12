@@ -1,10 +1,16 @@
-using Documenter
-using IRMA
+using Documenter, IRMA
 
 makedocs(
-    sitename = "IRMA",
+    sitename = "IRMA Docs",
     format = Documenter.HTML(),
-    modules = [IRMA]
+    modules = IRMA,
+    authors = "Adam L. Lyon",
+    clean = true,
+    pages = [
+        "index.md",
+        "shist.md",
+        "api.md",
+    ]
 )
 
 deploydocs(

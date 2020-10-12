@@ -1,12 +1,11 @@
 module IRMA
 
-using OnlineStats, StaticArrays
-
-
-import OnlineStats: Hist, nobs, value
+using OnlineStats, OnlineStatsBase
+using StaticArrays
+import Base: merge
 
 export
-    SHist, nobs, value, Hist
+    SHist, nobs, value, Hist, merge, mergeStatsCollectionWithSHist
 
 include("shist.jl")
 
