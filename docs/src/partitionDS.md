@@ -8,3 +8,5 @@ Note that `partitionDS` is really a wrapper around [Distributed.splitrange](http
 using IRMA
 partitionDS(1_000_000, 64)
 ```
+
+See an example [Pluto Notebook](https://github.com/lyon-fnal/IRMA/blob/lyon-fnal/issue1/examples/partitionDSPluto.jl) and a [static version](assets/examples/partitionDSPluto.jl.html).
