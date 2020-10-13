@@ -4,10 +4,11 @@ authors = ["Adam Lyon <lyon@fnal.gov>"]
 version = "0.1.0"
 
 [deps]
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 OnlineStats = "a15396b6-48d5-5d58-9928-6d29437db91e"
 OnlineStatsBase = "925886fa-5bf2-5e8e-b522-a9147a512338"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
-OnlineStats = "1.5.6"
+OnlineStats = "1.5.7"
 OnlineStatsBase = "1.4.4"

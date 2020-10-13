@@ -6,6 +6,8 @@ struct SHist{T,R <: StepRangeLen, N} <: OnlineStats.HistogramStat{T}
     out::StaticArrays.SVector{2, Int}     # Immutable
     left::Bool
     closed::Bool
+
+    # Replace the default constructor
     function SHist(edges::R, counts, out, left, closed, T::Type=eltype(edges), N=length(edges)-1) where {R <: StepRangeLen}
         new{T,R,N}(edges, counts, out, left, closed)
     end

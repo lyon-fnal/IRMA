@@ -1,3 +1,4 @@
 [deps]
 OnlineStats = "a15396b6-48d5-5d58-9928-6d29437db91e"
+RandomizedPropertyTest = "6d7a0864-9fbc-11e9-1427-7bb65d6eba8e"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
