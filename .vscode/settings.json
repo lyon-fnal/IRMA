@@ -1,3 +1,10 @@
 {
-    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA/test"
+    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA/test",
+    "cSpell.words": [
+        "isbits",
+        "isbitstype",
+        "randn",
+        "sherm",
+        "splitrange"
+    ]
 }
