@@ -9,6 +9,7 @@ makedocs(
     pages = [
         "index.md",
         "shist.md",
+        "partitionDS.md",
         "api.md",
     ]
 )

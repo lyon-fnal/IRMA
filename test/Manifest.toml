@@ -102,6 +102,12 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 deps = ["Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
+[[RandomizedPropertyTest]]
+deps = ["Logging", "Random"]
+git-tree-sha1 = "f2fcd4fa42d0af4da18e4f26df2fddbb7e28da23"
+uuid = "6d7a0864-9fbc-11e9-1427-7bb65d6eba8e"
+version = "0.1.0"
+
 [[RecipesBase]]
 git-tree-sha1 = "6ee6c35fe69e79e17c455a386c1ccdc66d9f7da4"
 uuid = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
