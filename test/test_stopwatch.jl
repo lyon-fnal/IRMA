@@ -1,7 +1,7 @@
-# Test StopWatch
+# Test Stopwatch
 
-@testset "StopWatch" begin
-    sw = StopWatch()
+@testset "Stopwatch" begin
+    sw = Stopwatch()
 
     @test sw.stamps == ["start"]
 
