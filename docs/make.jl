@@ -1,7 +1,5 @@
 using Documenter, IRMA
 
-ENV["JULIA_DEBUG"] = Documenter
-
 makedocs(
     sitename = "IRMA Docs",
     format = Documenter.HTML(),
