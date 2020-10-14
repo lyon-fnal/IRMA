@@ -10,6 +10,7 @@ makedocs(
     clean = true,
     pages = [
         "index.md",
+        "tips.md",
         "shist.md",
         "partitionDS.md",
         "stopwatch.md",
