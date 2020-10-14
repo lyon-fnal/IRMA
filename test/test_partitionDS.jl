@@ -1,6 +1,8 @@
 using RandomizedPropertyTest
 # See https://gitlab.com/quf/randomizedpropertytest.jl for RandomizedPropertyTest.jl info
 
+# NOTE - Since this does randomized property tests, running this testset will take a few seconds
+
 # Partition a dataset
 @testset "Partition dataset" begin
     
