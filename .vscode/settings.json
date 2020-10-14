@@ -1,6 +1,7 @@
 {
-    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA/test",
+    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA",
     "cSpell.words": [
+        "Wtime",
         "isbits",
         "isbitstype",
         "randn",
