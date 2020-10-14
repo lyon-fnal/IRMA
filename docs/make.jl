@@ -10,6 +10,7 @@ makedocs(
         "index.md",
         "shist.md",
         "partitionDS.md",
+        "stopwatch.md",
         "api.md",
     ]
 )
