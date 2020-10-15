@@ -4,53 +4,53 @@
 julia&gt; using OnlineStats
 
 julia&gt; h = fit!(Hist(-5:0.2:5), randn(1_000))
-Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; sh = SHist(h)
-SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>Note that an <code>SHist</code> is immutable. If you want to do anything real with it, you need to change it back into a <code>Hist</code>.</p><pre><code class="language-julia-repl">julia&gt; hh = Hist(sh)
-Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>The conversions are very fast (~300 ns).</p><p>If you have a <code>Series</code> of histograms you can also go back and forth with the following...</p><pre><code class="language-julia-repl">julia&gt; s1 = Series(Hist(-5:0.2:5), Hist(-10:0.1:10)) ; fit!(s1, randn(1000))
+SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>Note that an <code>SHist</code> is immutable. If you want to do anything real with it, you need to change it back into a <code>Hist</code>.</p><pre><code class="language-julia-repl">julia&gt; hh = Hist(sh)
+Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>The conversions are very fast (~300 ns).</p><p>If you have a <code>Series</code> of histograms you can also go back and forth with the following...</p><pre><code class="language-julia-repl">julia&gt; s1 = Series(Hist(-5:0.2:5), Hist(-10:0.1:10)) ; fit!(s1, randn(1000))
 Series
-├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 1, 0, 2  …  1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 1, 0, 0, 1, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ Hist: n=1000 | value=(x = -10.0:0.1:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; sh1 = Series(SHist.(s1.stats)...)
 Series
-├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 1, 0, 2  …  1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 1, 0, 0, 1, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ SHist: n=1000 | value=(x = -10.0:0.1:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; ss1 = Series(Hist.(sh1.stats)...)
 Series
-├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 1, 0, 2  …  1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 1, 0, 0, 1, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ Hist: n=1000 | value=(x = -10.0:0.1:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>Named groups are also possible.</p><pre><code class="language-julia-repl">julia&gt; s2 = Series(h1=Hist(-5:0.2:5), h2=Hist(-10:0.1:10)) ; fit!(s2, randn(1000))
 Series
-├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+├─ Hist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 2, 0, 0, 0, 0  …  4, 1, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ Hist: n=1000 | value=(x = -10.0:0.1:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; sh2 = Series((; zip(keys(s2.stats), SHist.(values(s2.stats)))...))
 Series
-├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 2, 0, 0, 0, 0  …  4, 1, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ SHist: n=1000 | value=(x = -10.0:0.1:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p><code>Series</code> is the only collection type that is implemented. Note that there is no way to make a <code>FTSeries</code> <code>isbits</code> (due to the function objects), so you&#39;ll have to construct a different object from its parts.</p><h2 id="Merging"><a class="docs-heading-anchor" href="#Merging">Merging</a><a id="Merging-1"></a><a class="docs-heading-anchor-permalink" href="#Merging" title="Permalink"></a></h2><p>Functions are provided to handle merging Static Histograms and their collections. Note that since they are immutable, there is no <code>merge!</code> method. The merge occurs by converting to a <code>Hist</code>, doing the merge, and then converting back to a <code>SHist</code>.</p><pre><code class="language-julia-repl">julia&gt; s1 = fit!(Hist(-5:0.2:5), randn(1000)) ; sh1 = SHist(s1)
-SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; s2 = fit!(Hist(-5:0.2:5), randn(1000)) ; sh2 = SHist(s2)
-SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 1, 0, 3  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 1, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; shm = merge(sh1, sh2)
-SHist: n=2000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 1, 0, 3  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>For <code>Series</code>, we have to use a special function, <code>mergeStatsCollectionWithSHist</code>.</p><pre><code class="language-julia-repl">julia&gt; ser1   = Series(h1=Hist(-5:0.2:5), h2=Hist(-10:0.2:10)) ; fit!(ser1,  randn(1_000));
+SHist: n=2000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1  …  1, 1, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre><p>For <code>Series</code>, we have to use a special function, <code>mergeStatsCollectionWithSHist</code>.</p><pre><code class="language-julia-repl">julia&gt; ser1   = Series(h1=Hist(-5:0.2:5), h2=Hist(-10:0.2:10)) ; fit!(ser1,  randn(1_000));
 
 julia&gt; sher1  = Series((; zip(keys(ser1.stats), SHist.(values(ser1.stats)))... ))
 Series
-├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 2  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0  …  2, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ SHist: n=1000 | value=(x = -10.0:0.2:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; ser2 = Series(h1=Hist(-5:0.2:5), h2=Hist(-10:0.2:10)) ; fit!(ser2, randn(1_000));
 
 julia&gt; sher2 = Series((; zip(keys(ser2.stats), SHist.(values(ser2.stats)))... ))
 Series
-├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+├─ SHist: n=1000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 └─ SHist: n=1000 | value=(x = -10.0:0.2:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 julia&gt; sherm = mergeStatsCollectionWithSHist(sher1, sher2)
 Series
-├─ SHist: n=2000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 3  …  1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-└─ SHist: n=2000 | value=(x = -10.0:0.2:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tips/">« Tips for doing stuff</a><a class="docs-footer-nextpage" href="../partitionDS/">Partitioning a DataSet »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 14 October 2020 20:44">Wednesday 14 October 2020</span>. Using Julia version 1.5.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+├─ SHist: n=2000 | value=(x = -5.0:0.2:5.0, y = [0, 0, 0, 0, 0, 0, 1, 0, 1, 0  …  3, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+└─ SHist: n=2000 | value=(x = -10.0:0.2:10.0, y = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0  …  0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tips/">« Tips for doing stuff</a><a class="docs-footer-nextpage" href="../partitionDS/">Partitioning a DataSet »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 15 October 2020 06:58">Thursday 15 October 2020</span>. Using Julia version 1.5.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
