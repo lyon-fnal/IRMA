@@ -8,7 +8,7 @@ import Distributed: splitrange
 
 export
     SHist, nobs, value, Hist, merge, mergeStatsCollectionWithSHist, 
-    partitionDS, StopWatch, stamp, asNamedTuple
+    partitionDS, Stopwatch, stamp, asNamedTuple
 
 include("shist.jl")
 include("partitionDS.jl")
