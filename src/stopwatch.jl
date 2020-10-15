@@ -1,5 +1,14 @@
 # Stopwatch - a type for recording MPI time
 
+function getTime()
+    if  MPI.Initialized()
+        return MPI.Wtime() 
+    else 
+        @debug "Using time() instead of MPI.Wtime()"
+        return time()
+    end
+end
+
 """
     Stopwatch
 
@@ -23,7 +32,7 @@ end
     Create a Stopwatch. The "start" entry will automatically be made
     and the MPI.Wtime will be filled in.
 """
-Stopwatch() = Stopwatch(["start"], [MPI.Wtime()])
+Stopwatch() = Stopwatch(["start"], [getTime()])
 
 """
     Stopwatch(nt::NamedTuple)
@@ -42,7 +51,7 @@ end
     It returns the elapsed time from the previous stamp.
 """
 function stamp(sw::Stopwatch, stamp::String)
-    push!(sw.timeAt, MPI.Wtime())
+    push!(sw.timeAt, getTime())
     push!(sw.stamps, stamp)
     return sw.timeAt[end] - sw.timeAt[end-1]
 end
