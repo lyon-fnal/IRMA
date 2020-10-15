@@ -1,5 +1,7 @@
 using Documenter, IRMA
 
+ENV["JULIA_DEBUG"] = Documenter
+
 makedocs(
     sitename = "IRMA Docs",
     format = Documenter.HTML(),
@@ -8,6 +10,7 @@ makedocs(
     clean = true,
     pages = [
         "index.md",
+        "tips.md",
         "shist.md",
         "partitionDS.md",
         "stopwatch.md",
