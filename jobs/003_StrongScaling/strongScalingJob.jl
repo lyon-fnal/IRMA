@@ -1,8 +1,10 @@
 # Strong scaling study by making one plot
 
-using IRMA
-using MPI, HDF5, JLD2
+using MPI
+using HDF5
+using JLD2
 using OnlineStats
+using IRMA
 
 # MPI boilerplate
 MPI.Init()
@@ -89,7 +91,7 @@ function go()
 
     stamp(sw, "done")
     totalTime = sw.timeAt[end] - sw.timeAt[1]
-    println("Total time for $myrank is $totalTime s\n")
+    println("Total time for $myrank is $totalTime s")
 end
 
 go()
