@@ -18,13 +18,15 @@ const root = 0
 const isroot = myrank == root
 
 @debug "I am rank $myrank of $nprocs"
-sleep(10)
 MPI.Barrier(comm)
 
 # Choose the input file
-#const fileName = joinpath(ENV["CSCRATCH"], "irmaData", "irma_2D.h5")   # Cori CSCRATDH
-#const fileName = joinpath(ENV["DW_PERSISTENT_STRIPED_irma"], "irma_2D.h5")  # Cori burst buffer
-const fileName = joinpath("/Users/lyon/Development/gm2/data", "irmaData_36488193_0.h5")  # My mac
+const fileName = if ENV["OSTYPE"] == "linux"
+                    joinpath(ENV["CSCRATCH"], "irmaData", "irma_2D.h5")   # Cori CSCRATDH
+                    #joinpath(ENV["DW_PERSISTENT_STRIPED_irma"], "irma_2D.h5")  # Cori burst buffer
+                else
+                    joinpath("/Users/lyon/Development/gm2/data", "irmaData_36488193_0.h5")  # My mac
+                end
 
 function histogramEnergy(energyData)
     # Note that the data is Float32, so the histogram edges must be Float32
@@ -35,7 +37,6 @@ end
 # Setup logging and timing
 const rankLog = Dict()
 const sw = Stopwatch()
-const to = TimerOutput()
 
 # Open the file
 h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
@@ -68,6 +69,7 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     # Make the histogram
     o = histogramEnergy(energyData)
     stamp(sw, "madeHistogram")
+    
 
     # Gather the histograms
     allHistos = MPI.Gather(SHist(o), root, comm)
@@ -98,8 +100,6 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
 
         writeTime = MPI.Wtime() - sw.timeAt[end]
         println("Time to write is $writeTime s")
-
-        print_timer(to)
     end
 end
 
@@ -108,4 +108,3 @@ totalTime = sw.timeAt[end] - sw.timeAt[1]
 println("Total time for $myrank is $totalTime s")
 
 @info "$myrank is done"
-

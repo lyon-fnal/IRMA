@@ -82,7 +82,7 @@ version = "1.1.0"
 
 [[HDF5]]
 deps = ["Blosc", "Compat", "HDF5_jll", "Libdl", "Mmap", "Random", "Requires"]
-git-tree-sha1 = "fe2319104b0fa5adcfec2b032c15230fc23b424f"
+git-tree-sha1 = "a4f6fab1cab4d284b80aea1ce79273708a4d0bc8"
 repo-rev = "master"
 repo-url = "https://github.com/JuliaIO/HDF5.jl.git"
 uuid = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
@@ -96,7 +96,7 @@ version = "1.10.5+6"
 
 [[IRMA]]
 deps = ["Distributed", "MPI", "OnlineStats", "OnlineStatsBase", "StaticArrays"]
-path = "/Users/lyon/Development/gm2/IRMA"
+path = "/global/homes/l/lyon/IRMA"
 uuid = "ce686792-a933-4d1d-b1a5-064b7fd99fb7"
 version = "0.1.0"
 
