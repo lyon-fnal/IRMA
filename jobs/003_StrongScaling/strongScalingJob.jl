@@ -18,6 +18,8 @@ const root = 0
 const isroot = myrank == root
 
 @debug "I am rank $myrank of $nprocs"
+sleep(10)
+MPI.Barrier(comm)
 
 # Choose the input file
 #const fileName = joinpath(ENV["CSCRATCH"], "irmaData", "irma_2D.h5")   # Cori CSCRATDH
@@ -30,70 +32,80 @@ function histogramEnergy(energyData)
     fit!(Hist(bins), energyData)
 end
 
-function go()
-    rankLog = Dict()
-    sw = Stopwatch()
+# Setup logging and timing
+const rankLog = Dict()
+const sw = Stopwatch()
+const to = TimerOutput()
 
-    h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
-        stamp(sw, "openedFile")
+# Open the file
+h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
+    stamp(sw, "openedFile")
 
-        energyDS = f["/ReconEastClusters/energy", dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
-        stamp(sw, "openedDataSet")
+    # pen the dataset
+    energyDS = f["/ReconEastClusters/energy", dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
+    stamp(sw, "openedDataSet")
 
-        nAllRows = length(energyDS)
-        isroot && @debug "There are $(nAllRows/1e9) billion rows"
+    nAllRows = length(energyDS)
+    isroot && @debug "There are $(nAllRows/1e9) billion rows"
 
-        # Partition the file
-        ranges = partitionDS(nAllRows, nprocs)
+    # Partition the file
+    ranges = partitionDS(nAllRows, nprocs)
 
-        myRange = ranges[myrank+1]   # myrank starts at 0
+    myRange = ranges[myrank+1]   # myrank starts at 0
 
-        # Record what we got
-        rankLog[:start] = first(myRange)
-        rankLog[:end]   = last(myRange)
-        rankLog[:len]   = length(myRange)
-        @debug "Part for $myrank is $(rankLog[:start]) : $(rankLog[:end]) ; length of $(rankLog[:len])"
-        stamp(sw, "determineRanges")
+    # Record what we got
+    rankLog[:start] = first(myRange)
+    rankLog[:end]   = last(myRange)
+    rankLog[:len]   = length(myRange)
+    @debug "Part for $myrank is $(rankLog[:start]) : $(rankLog[:end]) ; length of $(rankLog[:len])"
+    stamp(sw, "determineRanges")
 
-        # Read the data
-        energyData = energyDS[1, myRange]
-        stamp(sw, "readDataSet")
+    # Read the data
+    energyData = energyDS[1, myRange]
+    stamp(sw, "readDataSet")
+    @debug "$myrank Read data"
 
-        # Make the histogram
-        o = histogramEnergy(energyData)
-        stamp(sw, "madeHistogram")
+    # Make the histogram
+    o = histogramEnergy(energyData)
+    stamp(sw, "madeHistogram")
 
-        # Gather the histograms
-        allHistos = MPI.Gather(SHist(o), root, comm)
-        stamp(sw, "gatheredHistograms")
+    # Gather the histograms
+    allHistos = MPI.Gather(SHist(o), root, comm)
+    stamp(sw, "gatheredHistograms")
 
-        oneHisto = MPI.Reduce(SHist(o), merge, root, comm)
-        stamp(sw, "reducedHistograms")
+    oneHisto = MPI.Reduce(SHist(o), merge, root, comm)
+    stamp(sw, "reducedHistograms")
 
-        allRankLogs = MPI.Gather( (; rankLog...), root, comm)
-        stamp(sw, "gatheredRankLogs")
+    allRankLogs = MPI.Gather( (; rankLog...), root, comm)
+    stamp(sw, "gatheredRankLogs")
 
-        allTimings = MPI.Gather( asNamedTuple(sw), root, comm)
-        stamp(sw, "gatheredTimings")
+    allTimings = MPI.Gather( asNamedTuple(sw), root, comm)
+    stamp(sw, "gatheredTimings")
 
-        if isroot
+    if isroot
+        nnodes = ntasks = 1
+        cscratch = ".."
+        if haskey(ENV, "SLURM_NNODES")
             nnodes = ENV["SLURM_NNODES"]
             ntasks = ENV["SLURM_NTASKS_PER_NODE"]
-            outPath = joinpath(ENV["CSCRATCH"], "003_StrongScaling", "histos_$(nnodes)x$(ntasks).jld2")
-
-            # Write out results
-            @save outPath allHistos oneHisto allRankLogs allTimings
-
-            writeTime = MPI.Wtime() - sw.timeAt[end]
-            println("Time to write is $writeTime s")
+            cscratch = ENV["CSCRATCH"]
         end
-    end
 
-    stamp(sw, "done")
-    totalTime = sw.timeAt[end] - sw.timeAt[1]
-    println("Total time for $myrank is $totalTime s")
+        outPath = joinpath(cscratch, "003_StrongScaling", "histos_$(nnodes)x$(ntasks).jld2")
+
+        # Write out results
+        @save outPath allHistos oneHisto allRankLogs allTimings
+
+        writeTime = MPI.Wtime() - sw.timeAt[end]
+        println("Time to write is $writeTime s")
+
+        print_timer(to)
+    end
 end
 
-go()
+stamp(sw, "done")
+totalTime = sw.timeAt[end] - sw.timeAt[1]
+println("Total time for $myrank is $totalTime s")
+
 @info "$myrank is done"
 
