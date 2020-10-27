@@ -65,7 +65,7 @@ Adam Lyon, Muon g-2 IRMA Analysis, Fermilab, October 2020
 
 This notebook examines strong scaling properties of Julia IRMA jobs making just one plot. I ran jobs with 2,3,4,5,6,7,8,9,10,12,15 and 20 nodes and always with 32 tasks per node. If I examine the timings of a part of the Julia run that includes opening and reading the HDF5 input file, creating the histogram, and running `MPI.Reduce` and `MPI.Gather`, I see expected strong scaling. The jobs get faster with more nodes as each task has less of the file to read. If I examine the total elapsed time reported by the batch system, then the scaling is less clear. It almost appears that more nodes make Julia run more slowly. Speculation suggests that perhaps there is contention for loading packages. Next steps could be to try [PackageCompiler.jl](https://github.com/JuliaLang/PackageCompiler.jl) to make a Julia "app" with fast startup time. 
 
-This notebook answers issue [Analyze results from Strong Scaling jobs #18](https://github.com/lyon-fnal/IRMA/issues/18) and code may be found in (future PR). This file is (future file). 
+This notebook answers issue [Analyze results from Strong Scaling jobs #18](https://github.com/lyon-fnal/IRMA/issues/18) and code may be found in [PR #20](https://github.com/lyon-fnal/IRMA/pull/20). This file is [IRMA/analyses/018_StrongScaling/StrongScaling.jl](https://github.com/lyon-fnal/IRMA/blob/lyon-fnal/issue18/analyses/018_StrongScaling/strongScaling.jl). 
 
 ## What is this notebook?
 
@@ -538,7 +538,7 @@ begin
 end
 
 # ╔═╡ ef41bed4-17cd-11eb-2b92-69ec50165d3f
-batchInfo
+data_table(batchInfo)
 
 # ╔═╡ b254f75e-17cb-11eb-2ddd-c950293c10a0
 # Add CPU time per rank
@@ -606,7 +606,7 @@ timingComparisonPlot
 
 # ╔═╡ b81f0930-1805-11eb-2dc9-bd7a3380fdb5
 md"""
-So there's a lot going on that's not accounted for in my MPI timing.
+Note that for 4 nodes, the julia time plots on top of the batch time point. So there's a lot going on that's not accounted for in my MPI timing.
 """
 
 # ╔═╡ fa4cc80c-17d0-11eb-33f1-530ee3b26e3e
