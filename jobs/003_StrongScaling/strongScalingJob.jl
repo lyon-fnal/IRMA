@@ -6,6 +6,8 @@ using JLD2
 using OnlineStats
 using IRMA
 
+@debug "Begin"
+
 # MPI boilerplate
 MPI.Init()
 
@@ -46,7 +48,8 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     energyDS = f["/ReconEastClusters/energy", dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
     stamp(sw, "openedDataSet")
 
-    nAllRows = length(energyDS)
+    # Read in all the rows unless overriden by environment variable
+    nAllRows = haskey(ENV, "NALLROWS") ? parse(Int64, ENV["NALLROWS"]) : length(energyDS)
     isroot && @debug "There are $(nAllRows/1e9) billion rows"
 
     # Partition the file
@@ -69,7 +72,6 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     # Make the histogram
     o = histogramEnergy(energyData)
     stamp(sw, "madeHistogram")
-    
 
     # Gather the histograms
     allHistos = MPI.Gather(SHist(o), root, comm)
