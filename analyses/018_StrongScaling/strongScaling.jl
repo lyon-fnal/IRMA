@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.4
+# v0.12.6
 
 using Markdown
 using InteractiveUtils
@@ -79,7 +79,9 @@ This notebook examines strong scaling properties of my Julia IRMA jobs that make
 
 On 10/22, I ran [IRMA/jobs/003_StrongScaling/strongScalingJob.jl](https://github.com/lyon-fnal/IRMA/blob/master/jobs/003_StrongScaling/strongScalingJob.jl) from commit 82b715b answering issue [#3](https://github.com/lyon-fnal/IRMA/issues/3). This job reads in the cluster energy data from Muon g-2 era 2D and makes a plot of that energy for all clusters. The data is split evenly among all the MPI ranks. I've tried 2 nodes through 10 nodes. I always choose 32 tasks per node (advice from Marc Paterno). I ran the jobs in the debug queue.
 
-On 10/25 I ran three more jobs with 12, 15 and 20 nodes (still 32 tasks per node) respectively. These jobs ran in the regular queue. Note that I ran the 12 node job twice, the first time it ran I got a strange error, I think due to the `CSCRATCH` filesystem crashing (It's been a bad month for Cori). The second time I tried it, it ran fine. I ran these jobs in the regular queue, because the debug queue was very full. 
+On 10/27  I ran three more jobs with 12, 15 and 20 nodes (still 32 tasks per node) respectively. These jobs ran in the debug queue. 
+
+Note that on 10/25, I ran jobs with 12, 15 and 20 nodes in the regular queue. Note that I ran the 12 node job twice, the first time it ran I got a strange error, I think due to the `CSCRATCH` filesystem crashing (It's been a bad month for Cori). The second time I tried it, it ran fine. I ran these jobs in the regular queue, because the debug queue was very full. Because the elapsed time and memory usage looked strange, I replaced these runs with runs in the debug queue (see 10/27 above). See [a comparison](#compareRegDebug) in Code of these runs in debug and regular queues.
 
 All jobs ran on Haswell. Data came from `CSCRATCH`. 
 
@@ -209,7 +211,7 @@ main {
 const datapath = "/Users/lyon/Development/gm2/data/003_StrongScaling/"
 
 # ╔═╡ 00da17e6-14a6-11eb-1b60-c9f662572085
-histoFiles = @pipe glob("*.jld2", datapath) |> basename.(_)
+histoFiles = @pipe glob("*32.jld2", datapath) |> basename.(_)
 
 # ╔═╡ eeb2de64-156e-11eb-1372-1fc46f69a47a
 md"""
@@ -507,12 +509,12 @@ We can pull the job IDs from the log files...
 """
 
 # ╔═╡ 78026900-17c7-11eb-2cbf-d5d8242de89c
-slurmLogFiles = @pipe glob("slurm*.out", datapath) |> basename.(_)
+slurmLogFiles = @pipe glob("slurm-3*.out", datapath) |> basename.(_)
 
 # ╔═╡ a23a3482-17c7-11eb-3bf3-b5fb47d0b4e2
 function jobIdFromSlurmLogName(fn)
-	m = match(r"slurm-(\d+)[_]", fn)
-	m.captures[1]
+	m = match(r"slurm-(reg-)?(\d+)[_]", fn)
+	m.captures[2]
 end
 
 # ╔═╡ cbc4a1b6-17c7-11eb-07f7-c3286d80af40
@@ -520,22 +522,31 @@ slurmIds = jobIdFromSlurmLogName.(slurmLogFiles)
 
 # ╔═╡ 33b85bdc-17c8-11eb-091f-b5f1188d2538
 # Select out the jobIds that we care about
-begin
-	sacctM = filter(:JobID => j -> occursin.(slurmIds, j) |> any, sacct)
+function selectDesiredJobIds(jobIds)
+	sacctM = filter(:JobID => j -> occursin.(jobIds, j) |> any, sacct)
 	
 	# And don't care about the batch or extern jobs (not sure what they are)
 	filter!(:JobName => jn -> jn != "batch" && jn != "extern", sacctM)
+	
+	sacctM
 end
+
+# ╔═╡ 960ebf78-189b-11eb-0a62-6741d202aad1
+sacctM = selectDesiredJobIds(slurmIds)
 
 # ╔═╡ 10bf9aa8-17ca-11eb-3d2c-519fa0745aa4
 data_table(sacctM; items_per_page=40)
 
 # ╔═╡ f759ebb2-17ca-11eb-0672-1d5e4f78d791
 # Split this up into Julia info and batch info
-begin
+function splitIntoBatchAndJulia(sacctM)
 	batchInfo = filter(:JobName => jn -> jn != "julia", sacctM)
 	juliaInfo = filter(:JobName => jn -> jn == "julia", sacctM)
+	return batchInfo, juliaInfo
 end
+
+# ╔═╡ c81126aa-189b-11eb-0109-239a3997071c
+batchInfo, juliaInfo = splitIntoBatchAndJulia(sacctM)
 
 # ╔═╡ ef41bed4-17cd-11eb-2b92-69ec50165d3f
 data_table(batchInfo)
@@ -676,8 +687,42 @@ maxDiskWrite = @df juliaInfo scatter(:NNodes, parseMemoryToMB.(:MaxDiskWrite).*1
 # ╔═╡ 2f409828-1814-11eb-3a65-812103b81ceb
 maxDiskWrite
 
+# ╔═╡ 95a0ff20-189f-11eb-07f3-9f5f93e5da61
+html"""<a id="compareRegDebug"></a>"""
+
+# ╔═╡ ddc57be6-189a-11eb-0652-b3adc879ed4a
+md"""
+### Compare debug queue to regular queue
+
+I ran 12, 15 and 20 nodes in the regular queue since getting nodes from the debug queue was very slow. Let's compare accounting info from those queues. 
+"""
+
+# ╔═╡ fea4afe4-189a-11eb-2a48-27f18a2d9a46
+slurmRegLogFiles = @pipe glob("slurm-reg*.out", datapath) |> basename.(_)
+
+# ╔═╡ 24829500-189b-11eb-0251-ad32fd25baa1
+slurmRegIds = jobIdFromSlurmLogName.(slurmRegLogFiles)
+
+# ╔═╡ 3d12c680-189b-11eb-18b5-7bd9e65fc6d5
+batchRegInfo, juliaRegInfo = selectDesiredJobIds(slurmRegIds) |> splitIntoBatchAndJulia
+
+# ╔═╡ 4314b550-189d-11eb-1cd3-b9a29f89e88c
+names(batchInfo)
+
+# ╔═╡ 142e2b9a-189d-11eb-1376-e3ba32866a88
+@pipe filter(:NNodes => n -> n in [12, 15, 20], juliaInfo) |> select(_, [:JobID, :NNodes, :ElapsedRaw, :MaxRSS, :MaxVMSize, :MaxDiskRead, :MaxDiskWrite])
+
+# ╔═╡ 9ad18228-189d-11eb-35da-8bb3457adfcf
+  select(juliaRegInfo, [:JobID, :NNodes, :ElapsedRaw, :MaxRSS, :MaxVMSize, :MaxDiskRead, :MaxDiskWrite])
+
+# ╔═╡ 22f92c24-189d-11eb-0cb2-ddf9f6b7bc63
+@pipe filter(:NNodes => n -> n in [12, 15, 20], batchInfo) |> select(_, [:JobID, :QOS, :NNodes, :ElapsedRaw])
+
+# ╔═╡ 2518f3ee-189e-11eb-2ebe-1135d8573697
+select(batchRegInfo, [:JobID, :QOS, :NNodes, :ElapsedRaw])
+
 # ╔═╡ Cell order:
-# ╟─406a9370-14a0-11eb-069d-113287d17309
+# ╠═406a9370-14a0-11eb-069d-113287d17309
 # ╠═3d170482-180f-11eb-3cb7-ddf2ff03cbdc
 # ╟─5ebefb64-180f-11eb-2f52-b71025782dda
 # ╠═28a44380-1810-11eb-3f34-79e96d39fe69
@@ -776,8 +821,10 @@ maxDiskWrite
 # ╠═a23a3482-17c7-11eb-3bf3-b5fb47d0b4e2
 # ╠═cbc4a1b6-17c7-11eb-07f7-c3286d80af40
 # ╠═33b85bdc-17c8-11eb-091f-b5f1188d2538
+# ╠═960ebf78-189b-11eb-0a62-6741d202aad1
 # ╠═10bf9aa8-17ca-11eb-3d2c-519fa0745aa4
 # ╠═f759ebb2-17ca-11eb-0672-1d5e4f78d791
+# ╠═c81126aa-189b-11eb-0109-239a3997071c
 # ╠═ef41bed4-17cd-11eb-2b92-69ec50165d3f
 # ╠═b254f75e-17cb-11eb-2ddd-c950293c10a0
 # ╟─555de22e-1805-11eb-08db-8706119416cf
@@ -802,3 +849,13 @@ maxDiskWrite
 # ╠═98cac44e-17d2-11eb-08e5-27058446fcb4
 # ╠═adccf4e4-17d2-11eb-213f-6df6bb96199b
 # ╠═f94cf10a-17d2-11eb-0843-9fc4cb642d8d
+# ╟─95a0ff20-189f-11eb-07f3-9f5f93e5da61
+# ╟─ddc57be6-189a-11eb-0652-b3adc879ed4a
+# ╠═fea4afe4-189a-11eb-2a48-27f18a2d9a46
+# ╠═24829500-189b-11eb-0251-ad32fd25baa1
+# ╠═3d12c680-189b-11eb-18b5-7bd9e65fc6d5
+# ╠═4314b550-189d-11eb-1cd3-b9a29f89e88c
+# ╠═142e2b9a-189d-11eb-1376-e3ba32866a88
+# ╠═9ad18228-189d-11eb-35da-8bb3457adfcf
+# ╠═22f92c24-189d-11eb-0cb2-ddf9f6b7bc63
+# ╠═2518f3ee-189e-11eb-2ebe-1135d8573697
