@@ -70,12 +70,12 @@ Let's now concentrate on seeing if the reading time scales. We'll take the mean 
 
 # ╔═╡ 4692bef6-1e48-11eb-1fa6-0174114f71cb
 md"""
-We can also look at reducing the number of ranks per node to see if there's any significant i/o contention. Here is the read time for 5 nodes but varying the number of ranks per node.
+We can also look at reducing the number of ranks per node to see if there's any significant i/o overhead and/or contention. Here is the read time for 5 nodes but varying the number of ranks per node.
 """
 
 # ╔═╡ 983b49a8-1e48-11eb-0d91-3158ba41d2fc
 md"""
-Let's calculate the fraction of time in contention; that is the difference between the measured read time and the expected time divided by the measured read time.
+Let's calculate the fraction of time in overhead/contention; that is the difference between the measured read time and the expected time divided by the measured read time.
 """
 
 # ╔═╡ d088a212-1e55-11eb-2657-d9e89d853243
@@ -85,7 +85,7 @@ md"""
 These results are improved and more stable by using `PackageCompiler.jl`. Things that I conclude from this study.
 
 * Use `PackageCompiler.jl`
-* 32 tasks per node seems to involve significant i/o contention
+* 32 tasks per node seems to involve significant i/o overhead and/or contention
 * Configuring a large number of nodes takes a signifcant amount of time. 
 """
 
@@ -359,7 +359,7 @@ end
 
 # ╔═╡ 19761aa4-1e4a-11eb-1094-6b7d3e2b1ad4
 md"""
-So the above plot suggests that fewer ranks per node is more efficient. When we ask for 32 nodes, we are possibly wasting about 30% of the read time in i/o contention. Here's a table,...
+So the above plot suggests that fewer ranks per node is more efficient. When we ask for 32 nodes, we are possibly wasting about 30% of the read time in i/o overhead and/or contention. Here's a table,...
 
 $maxMean5ReadTimes
 
@@ -391,7 +391,7 @@ Plot the difference...
 
 # ╔═╡ 41ee8584-1e0b-11eb-3cbf-e749dcceb519
 max5ReadTimesDiffPlot = @df maxMean5ReadTimes scatter(:numTasks, :diffPerc, legend=nothing,
-            										  xaxis="Number of tasks", yaxis="Percentage of time in contention (%)")
+            										  xaxis="Number of tasks", yaxis="Percentage of time in overhead/contention (%)")
 
 # ╔═╡ 9d746b5c-1e48-11eb-1f8c-156345ab99cf
 max5ReadTimesDiffPlot
