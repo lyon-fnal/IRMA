@@ -65,3 +65,43 @@ function asNamedTuple(sw::Stopwatch)
     (; zip(Symbol.(sw.stamps), sw.timeAt)...)
 end
     
+"""
+    rankTimings(arrayOfNamedTuples)
+
+    Process an array of named tuples (e.g. from MPI ranks from `asNamedTuple`
+    that was gathered and saved) turning them into an array of NamedTuples 
+    of timing differences for each step.
+"""
+function rankTimings(a)
+    # Get the list of timings, dropping the first one
+    theKeys = @pipe a[1] |> keys(_) |> Iterators.rest(_, 2) |> collect
+
+    # Make an empty Named tuple with the correct structure
+    timeDiffs = (; zip(theKeys,
+                       [Float64[] for _ in eachindex(theKeys)]
+                   )...
+    )
+
+    # We're going to transpose the data from an array of ranks to
+    # an array of timings
+    for aRank in a      # Loop over the ranks
+        tdiffs = aRank |> collect |> diff
+        for i in eachindex(theKeys)
+            push!(timeDiffs[i], tdiffs[i])
+        end
+    end
+    timeDiffs # Return the naned tuple
+end
+
+"""
+    rankTotalTime(arrayOfNamedTuples)
+
+    Return an array for the total time of each ranks
+"""
+function rankTotalTime(a)
+    totalTime=Float64[]
+    for aRank in a
+        push!(totalTime, aRank[end]-aRank[1])
+    end
+    totalTime
+end
