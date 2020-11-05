@@ -39,10 +39,11 @@ MPI.Barrier(comm)
 #   Strangely, there is no Mac environment variable that says "Darwin" (the shell
 #   seems to fill in $OSTYPE on the Mac, but it's not a real environment variable).
 #   So we'll just make this decision based on my Home area. Kinda stupid.
+const era = haskey(ENV, "GM2_ERA") ? ENV["GM2_ERA"] : ""
 const fileName = if ENV["HOME"] == "/Users/lyon"  # Am I on my Mac
                     joinpath("/Users/lyon/Development/gm2/data", "irmaData_36488193_0.h5")  # My mac
                 else
-                    joinpath(ENV["CSCRATCH"], "irmaData", "irma_2D.h5")   # Cori CSCRATDH
+                    joinpath(ENV["CSCRATCH"], "irmaData", "irma_$era.h5")   # Cori CSCRATDH
                     #joinpath(ENV["DW_PERSISTENT_STRIPED_irma"], "irma_2D.h5")  # Cori burst buffer
                 end
 
@@ -114,15 +115,15 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     stamp(sw, "gatheredTimings")
 
     if isroot
-        nnodes = ntasks = 1
+        nnodes = ntasks = 1   # If on my Mac
         cscratch = ".."
-        if haskey(ENV, "SLURM_NNODES")
+        if haskey(ENV, "SLURM_NNODES")   # If on Cori
             nnodes = ENV["SLURM_NNODES"]
             ntasks = ENV["SLURM_NTASKS_PER_NODE"]
             cscratch = ENV["CSCRATCH"]
         end
 
-        outPath = joinpath(cscratch, "023_energyByCal", "histos_$(nnodes)x$(ntasks).jld2")
+        outPath = joinpath(cscratch, "023_energyByCal", era, "histos_$(nnodes)x$(ntasks).jld2")
 
         # Write out results
         @save outPath  allHistos allRankLogs allTimings
