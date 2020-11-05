@@ -20,8 +20,6 @@ const EnergyCal_run2 = Float32[
 # Calculate the full energy correction factor for each calorimeter
 const eCal =  @. Float32(1700.0^2) / EnergyCal_run1  / EnergyCal_run2
 
-@debug "I am rank $myrank of $nprocs"
-
 # Choose the input file...
 #   Logic here is so that I don't have to remember to change this if I'm on my Mac.
 #   Strangely, there is no Mac environment variable that says "Darwin" (the shell
@@ -36,7 +34,6 @@ const fileName = if ENV["HOME"] == "/Users/lyon"  # Am I on my Mac
 
 # Constants
 const nCalos = 24
-
 
 # Open the file
 f = h5open(fileName, "r")

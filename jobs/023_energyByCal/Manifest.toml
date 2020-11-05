@@ -117,9 +117,7 @@ version = "1.10.5+7"
 
 [[IRMA]]
 deps = ["Distributed", "MPI", "OnlineStats", "OnlineStatsBase", "Pipe", "StaticArrays"]
-git-tree-sha1 = "9dd7ad82e1c45a7c3216662ebbe4bca276d1d692"
-repo-rev = "lyon-fnal/issue23"
-repo-url = "/Users/lyon/Development/gm2/IRMA"
+path = "/Users/lyon/Development/gm2/IRMA"
 uuid = "ce686792-a933-4d1d-b1a5-064b7fd99fb7"
 version = "0.1.0"
 

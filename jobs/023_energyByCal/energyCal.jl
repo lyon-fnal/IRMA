@@ -6,14 +6,6 @@ using JLD2
 using OnlineStats
 using IRMA
 
-function mergedSerializedArrayOfHists(s1, s2)
-    # Deserialize s1 and s2
-    h1 = MPI.deserialize(s1)
-    h2 = MPI.deserialize(s2)
-    hm = merge.(h1, h2)
-    MPI.serialize(hm)
-end
-
 # MPI boilerplate
 MPI.Init()
 
@@ -111,18 +103,9 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     hists =  [fit!(Hist(bins), @. analysisEnergy[ (caloData == aCalo) & (analysisTime >= 22.0) ]) for aCalo in 1:nCalos ]
     stamp(sw, "filledHistograms")
 
-    # Gather (maybe) and reduce the histograms
-    # Note that an array of SHists is not isbits - so we need to gather/reduce each element.
-    # Converting that array into an SVector seems to take a long time.
-    allHists = []
-    for aHist in hists
-        gatheredHists = MPI.Gather(SHist(aHist), root, comm)
-        push!(allHists, gatheredHists)
-    end
-    stamp(sw, "gatheredHistograms")
-
-    reducedHistsS = MPI.Reduce(MPI.serialize(hists), mergeStatsCollectionWithSHist, root, comm)
-    stamp(sw, "reducedHistograms")
+    # Reducing the histograms is very slow - instead just Gather them all up
+    allHistos = IRMA.mpiGatherSerialized(hists, isroot, root, comm)
+    stamp(sw, "gatheredAllHistograms")
 
     allRankLogs = MPI.Gather( (; rankLog...), root, comm)
     stamp(sw, "gatheredRankLogs")
@@ -141,11 +124,8 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
 
         outPath = joinpath(cscratch, "023_energyByCal", "histos_$(nnodes)x$(ntasks).jld2")
 
-        # Deserialize as necessary
-        reducedHists = MPI.deserialize(reducedHistsS)
-
         # Write out results
-        @save outPath allHists reducedHists allRankLogs allTimings
+        @save outPath  allHistos allRankLogs allTimings
 
         writeTime = MPI.Wtime() - sw.timeAt[end]
         println("Time to write is $writeTime s")
@@ -158,6 +138,6 @@ println("Total time for $myrank is $totalTime s")
 
 @info "$myrank is done"
 
-
-
-
+# Later on, to reduce the gathered histograms, do
+# m = [ [ allHistos[r][c] for r in eachindex(allHistos) ] for c in eachindex(allHistos[1]) ]
+# rh = reduce.(merge, m)
