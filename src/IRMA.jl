@@ -8,11 +8,13 @@ import Base: merge
 import Distributed: splitrange
 
 export
-    SHist, nobs, value, Hist, merge, mergeStatsCollectionWithSHist, 
-    partitionDS, Stopwatch, stamp, asNamedTuple, rankTimings, rankTotalTime
+    SHist, nobs, value, Hist, merge, mergeStatsCollectionWithSHist,
+    partitionDS, Stopwatch, stamp, asNamedTuple, rankTimings, rankTotalTime,
+    mpiGatherSerialized
 
 include("shist.jl")
 include("partitionDS.jl")
 include("stopwatch.jl")
+include("mpi.jl")
 
 end # module
