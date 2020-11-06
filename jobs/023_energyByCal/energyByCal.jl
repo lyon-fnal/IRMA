@@ -100,7 +100,8 @@ h5open(fileName, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE) do f
     stamp(sw, "calibrated")
 
     # Make histograms of energy for each calorimeter # with cuts
-    bins = range( Float32(0), stop=Float32(10_000), length=500)
+    # Note the length is nBins+1
+    bins = range( Float32(0), stop=Float32(10_000), length=501)
     hists =  [fit!(Hist(bins), @. analysisEnergy[ (caloData == aCalo) & (analysisTime >= 22.0) ]) for aCalo in 1:nCalos ]
     stamp(sw, "filledHistograms")
 

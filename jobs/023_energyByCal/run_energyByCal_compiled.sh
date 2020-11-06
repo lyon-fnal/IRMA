@@ -1,10 +1,9 @@
 #!/bin/bash
 #SBATCH --qos=debug
 #SBATCH --time=10
-#SBATCH --nodes=1
+#SBATCH --nodes=10
 #SBATCH --tasks-per-node=32
 #SBATCH --constraint=haswell
-#DW persistentdw name=irma
 
 #export JULIA_DEBUG="energyByCal,Main,IRMA"
 #export NALLROWS=200000
