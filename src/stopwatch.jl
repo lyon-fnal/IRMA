@@ -2,8 +2,8 @@
 
 function getTime()
     if  MPI.Initialized()
-        return MPI.Wtime() 
-    else 
+        return MPI.Wtime()
+    else
         @debug "Using time() instead of MPI.Wtime()"
         return time()
     end
@@ -12,13 +12,13 @@ end
 """
     Stopwatch
 
-    Stopwatch is an object that keeps track of MPI.Wtime when asked. 
+    Stopwatch is an object that keeps track of MPI.Wtime when asked.
 
     At construction time, the "start" time is recorded.
     Call `stamp(sw, stamp)` to record the current MPI.Wtime and label
                             it with "stamp"
 
-    Call `asNamedTuple(sw)` for transferring to other MPI ranks. The 
+    Call `asNamedTuple(sw)` for transferring to other MPI ranks. The
     resulting NamedTuple with be `isbits` type.
 """
 mutable struct Stopwatch
@@ -53,6 +53,7 @@ end
 function stamp(sw::Stopwatch, stamp::String)
     push!(sw.timeAt, getTime())
     push!(sw.stamps, stamp)
+    @debug "IRMA.stamp: $(MPI.Comm_rank(MPI.COMM_WORLD)) $stamp $(sw.timeAt[end]-sw.timeAt[end-1])"
     return sw.timeAt[end] - sw.timeAt[end-1]
 end
 
@@ -64,12 +65,12 @@ end
 function asNamedTuple(sw::Stopwatch)
     (; zip(Symbol.(sw.stamps), sw.timeAt)...)
 end
-    
+
 """
     rankTimings(arrayOfNamedTuples)
 
     Process an array of named tuples (e.g. from MPI ranks from `asNamedTuple`
-    that was gathered and saved) turning them into an array of NamedTuples 
+    that was gathered and saved) turning them into an array of NamedTuples
     of timing differences for each step.
 """
 function rankTimings(a)
