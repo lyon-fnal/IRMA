@@ -76,7 +76,7 @@ size(allHistos), size(allHistos[1])
 
 # ╔═╡ 1b0bca2e-1fb1-11eb-1fb5-1f9d7ae21484
 md"""
-`allHistos` has all of the histograms from all of the ranks. Each rank makes 24 histograms (one for each calorimeter) - that's the inner array. There are 320 ranks - that's the outer array. We want to merge the 24 histograms across the ranks. We need to invert the nesting. That is convert the array of 320 elements and each element with 24 histograms to an array with 24 elements and each element with 320 histograms. 
+`allHistos` has all of the histograms from all of the ranks. Each rank makes 24 histograms (one for each calorimeter) - that's the inner array. There are 320 ranks - that's the outer array. We want to merge the 24 histograms across the ranks. We need to invert the nesting. That is convert the array of 320 elements and each element with 24 histograms to an array with 24 elements and each element with 320 histograms.
 """
 
 # ╔═╡ 46f7cb38-1fb1-11eb-01a2-7d584b21eaf2
@@ -155,16 +155,16 @@ function jld2ToPickle(jld2File, outputFileName)
 	data = load(jld2File)
 	allHistos = data["allHistos"]  # Get the histograms
 	rh = makeMergedHistograms(allHistos)
-	
+
 	# Construct the histogram
 	d = Dict{Any}{Any}("bin_counts_cal$i" => h.counts for (i,h) in enumerate(rh))  # Counts first
-	
+
 	# Add edges, nBins and bin width
 	e = rh[1].edges |> collect
 	d["edges"] = e
 	d["nbins"] = length(rh[1].counts)
 	d["bin_width"] = e[2] - e[1]
-	
+
 	# Store it
 	store(outputFileName, d)
 end
@@ -220,16 +220,8 @@ begin
 	plot(p1, p2, size=(1000,700))
 end
 
-# ╔═╡ 7dc97788-1fd9-11eb-3a38-6935450e67b5
-begin
-	begin
-		x = sin.(0:0.3:2pi)
-		plot(x, line=:steppre, linewidth=3)
-	end
-end
-
 # ╔═╡ Cell order:
-# ╠═63c3acfa-1faf-11eb-02ee-d502c7095761
+# ╟─63c3acfa-1faf-11eb-02ee-d502c7095761
 # ╟─94695622-1faf-11eb-1c81-7905182aa851
 # ╠═a2c2cf00-1faf-11eb-0714-1d1df849983f
 # ╠═0eb38a88-1fb0-11eb-22c7-67df7708cc1a
@@ -269,4 +261,3 @@ end
 # ╠═15b3ce00-1fd9-11eb-28f9-edf57fa9a610
 # ╠═29c4b60c-1fd9-11eb-2ecf-8b12bf73d0cb
 # ╠═336c692a-1fd9-11eb-2e10-63fce8e0bf8c
-# ╠═7dc97788-1fd9-11eb-3a38-6935450e67b5
