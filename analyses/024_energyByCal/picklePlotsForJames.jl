@@ -38,6 +38,9 @@ end
 # ╔═╡ 8f1f0f28-1fd8-11eb-1f5a-41314f5d7fc7
 using PlutoUI
 
+# ╔═╡ 70fb7972-22bb-11eb-0ef7-270590a973dc
+using StatsBase
+
 # ╔═╡ 63c3acfa-1faf-11eb-02ee-d502c7095761
 md"""
 # Plots for JamesS
@@ -220,6 +223,89 @@ begin
 	plot(p1, p2, size=(1000,700))
 end
 
+# ╔═╡ e02833d4-22b2-11eb-0283-7f2ddd2b9deb
+md"""
+### Make nicer plots
+
+You can get rid of the lines with `linecolor=:match` or `linecolor=:transparent`.
+"""
+
+# ╔═╡ e40a702c-22b2-11eb-284f-0747c31cf941
+plot(rh_2D[4], legend=nothing, xaxis="Energy [MeV]", title="Energy for calorimeter $cal2D", linecolor=:match)
+
+# ╔═╡ 1807b9dc-22b3-11eb-0fec-b74f565981b2
+md"""
+`stephist` is an "open" histogram, but the recipie in `OnlineStats` can't do that. So let's write a little function. See [code in OnlineStats.jl](https://github.com/joshday/OnlineStats.jl/blob/master/src/viz/recipes.jl#L117).
+
+Here's the recipe in `OnlineStats.jl/src/viz/recipes`...
+
+```julia
+#-----------------------------------------------------------------------# Histograms
+@recipe function f(o::HistogramStat; normalize=true)
+    e, c = edges(o), counts(o)
+    inds = findfirst(x -> x > 0, c):findlast(x -> x > 0, c)
+    normalize --> normalize
+    Histogram(e[vcat(inds, inds[end] + 1)], c[inds], _closed(o))
+end
+
+_closed(o::Hist) = o.left ? :left : :right 
+_closed(o) = :left
+```
+
+`counts and edges` are [unexported functions](https://github.com/joshday/OnlineStats.jl/blob/872f9ff514163477faabd79ec2d4899b518c587e/src/stats/histograms.jl#L83) in `OnlineStats.jl/src/stats/histograms.jl`.
+
+`Histogram` is a type defined in `StatsBase.jl` (which `OnlineStats` uses). See [constructor](https://github.com/JuliaStats/StatsBase.jl/blob/d5e6fbc4077160e95c7f46efa1bb69261784d9fb/src/hist.jl#L189). The constructor takes the edges and the weights (and a closed flag).
+"""
+
+# ╔═╡ 4b541e3e-22b3-11eb-1ef9-41429012e324
+function stephistM(o; normalize=true, kwargs...)
+	e, c = o.edges, o.counts
+	
+	# Find the range of indices that have counts > 0
+	inds = findfirst(x -> x > 0, c):findlast(x -> x > 0, c)	# This is a range
+	einds = vcat(inds, inds[end]+1)  # Go to one more edge to capture the last bin; remember, length(e) = length(c)+1
+		
+	closed = o.left ? :left : :right
+	
+	h = Histogram(e[einds], c[inds], closed)	
+end
+
+# ╔═╡ 0b971f9c-22b5-11eb-2423-6162f5929ab2
+plot( stephistM(rh_2D[4]) )
+
+# ╔═╡ afe8600a-22bb-11eb-1812-4346c80cdbe9
+h  = stephistM(rh_2D[4])
+
+# ╔═╡ 6cc1f7dc-22bb-11eb-1fae-392e2bbf2a55
+plot(h, seriestype=:step)
+
+# ╔═╡ 69173c96-22bb-11eb-22b4-9d897a4758e8
+h2 = fit!(Hist(-5:0.2:5), randn(1000))
+
+# ╔═╡ 53c94960-22bb-11eb-2fff-6fd73f7be93e
+plot(h2, seriestype=:barbins)
+
+# ╔═╡ c4d93fd6-22ff-11eb-0fa0-098d81c98766
+gr()
+
+# ╔═╡ c85e9ff2-22ff-11eb-08a2-239eecfe833a
+plot(h2, seriestype=:stepbins, legend=nothing, linewidth=3, yminorticks=10)
+
+# ╔═╡ 3720130c-2301-11eb-3d47-af5ff9bc0a10
+yticks=[10^x for x =0:7]
+
+# ╔═╡ e6248272-22ff-11eb-2263-0978822d90e6
+begin
+	plot(rh_2D[1], seriestype=:stepbins, label="calo01", xlim=(0,6200), ylim=(1,5e7), yscale=:log10,
+	                xlabel="E [MeV]", ylabel="Counts per 20.0 MeV bin", title="Energy",
+	                size=(600,400), yticks=(yticks), minorticks=10, framestyle=:semi)
+	plot!(rh_2D[7], seriestype=:stepbins, label="calo07")
+	plot!(rh_2D[11], seriestype=:stepbins, label="calo11")
+	plot!(rh_2D[16],  seriestype=:stepbins, label="calo16")
+	plot!(rh_2D[17],  seriestype=:stepbins, label="calo17")
+	plot!(rh_2D[24],  seriestype=:stepbins, label="calo24")
+end
+
 # ╔═╡ Cell order:
 # ╟─63c3acfa-1faf-11eb-02ee-d502c7095761
 # ╟─94695622-1faf-11eb-1c81-7905182aa851
@@ -261,3 +347,17 @@ end
 # ╠═15b3ce00-1fd9-11eb-28f9-edf57fa9a610
 # ╠═29c4b60c-1fd9-11eb-2ecf-8b12bf73d0cb
 # ╠═336c692a-1fd9-11eb-2e10-63fce8e0bf8c
+# ╟─e02833d4-22b2-11eb-0283-7f2ddd2b9deb
+# ╠═e40a702c-22b2-11eb-284f-0747c31cf941
+# ╟─1807b9dc-22b3-11eb-0fec-b74f565981b2
+# ╠═4b541e3e-22b3-11eb-1ef9-41429012e324
+# ╠═0b971f9c-22b5-11eb-2423-6162f5929ab2
+# ╠═70fb7972-22bb-11eb-0ef7-270590a973dc
+# ╠═afe8600a-22bb-11eb-1812-4346c80cdbe9
+# ╠═6cc1f7dc-22bb-11eb-1fae-392e2bbf2a55
+# ╠═69173c96-22bb-11eb-22b4-9d897a4758e8
+# ╠═53c94960-22bb-11eb-2fff-6fd73f7be93e
+# ╠═c4d93fd6-22ff-11eb-0fa0-098d81c98766
+# ╠═c85e9ff2-22ff-11eb-08a2-239eecfe833a
+# ╠═3720130c-2301-11eb-3d47-af5ff9bc0a10
+# ╠═e6248272-22ff-11eb-2263-0978822d90e6
