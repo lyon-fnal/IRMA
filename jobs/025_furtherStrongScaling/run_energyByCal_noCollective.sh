@@ -11,6 +11,8 @@
 # [] JULIA_DEBUG
 # [] no trace
 # [] no -n
+# [] Check -J
+# [] Correct Julia program
 # [] Notes
 # [] Input file
 
@@ -19,7 +21,7 @@ which julia
 
 export JULIA_DEBUG="energyByCal,Main"
 
-export OUTDIR=$CSCRATCH/025_futherStrongScaling/tenNodes_2C_mpio
+export OUTDIR=$CSCRATCH/025_futherStrongScaling/tenNodes_2C_noCollective
 #export OUTDIR=$CSCRATCH/025_futherStrongScaling/test
 mkdir -p $OUTDIR
 
@@ -28,11 +30,12 @@ date +"Time_before %s"
 
             #  --trace-compile=energyByCal_precompile.jl \
                 #    -n 200000 \
+            #  -J energyByCal.so \
 
 srun  julia  --project=. \
-             -J energyByCal.so \
-              energyByCal.jl \
-                   --notes="compiled,mpio" \
+             -J energyByCal_noCollective.so \
+              energyByCal_noCollective.jl \
+                   --notes="compiled" \
                    $CSCRATCH/irmaData2/merged_striped_large/irmaData_2C_merged.h5 \
                    $OUTDIR
 
