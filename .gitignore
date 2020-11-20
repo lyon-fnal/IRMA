@@ -1,3 +1,6 @@
 **.DS_Store
 *.pkl
 *.out
+*_precompile.jl
+*.so
+*.pdf
