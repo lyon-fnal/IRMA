@@ -30,7 +30,7 @@ date +"Time_before %s"
                 #    -n 200000 \
 
 srun  julia  --project=. \
-             -J energyByCal.so \
+             -J energyByCal_mpio.so \
               energyByCal.jl \
                    --notes="compiled,mpio" \
                    $CSCRATCH/irmaData2/merged_striped_large/irmaData_2C_merged.h5 \
