@@ -1,0 +1,5 @@
+Sat Nov 21 09:55:22 2020
+             JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+          36473604 debug_hsw run_ener     lyon  PENDING       0:00     15:00     10 (burst_buffer/datawarp: dws_data_in: DataWarp REST API error: 1 stage in errors encountered, aborting
+Stage in requested for session 140725 configuration 81026 task uuid 3d1859fe-d599-498f-aa03-2305e9431064: /global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5 -> /irmaData_2C_merged.h5
+)
