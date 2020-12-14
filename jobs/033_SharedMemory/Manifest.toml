@@ -13,9 +13,9 @@ version = "2.1.0"
 
 [[ArgParse]]
 deps = ["Logging", "TextWrap"]
-git-tree-sha1 = "a8fc2e149cd6db276c76faebe197ccd3a92fb9ff"
+git-tree-sha1 = "4a8f4df432fd8e8a96a142c53f9432b9022a92e6"
 uuid = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
-version = "1.1.0"
+version = "1.1.1"
 
 [[Artifacts]]
 deps = ["Pkg"]
@@ -69,9 +69,9 @@ version = "0.7.0"
 
 [[Compat]]
 deps = ["Base64", "Dates", "DelimitedFiles", "Distributed", "InteractiveUtils", "LibGit2", "Libdl", "LinearAlgebra", "Markdown", "Mmap", "Pkg", "Printf", "REPL", "Random", "SHA", "Serialization", "SharedArrays", "Sockets", "SparseArrays", "Statistics", "Test", "UUIDs", "Unicode"]
-git-tree-sha1 = "a706ff10f1cd8dab94f59fd09c0e657db8e77ff0"
+git-tree-sha1 = "919c7f3151e79ff196add81d7f4e45d91bbf420b"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "3.23.0"
+version = "3.25.0"
 
 [[CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -156,9 +156,9 @@ uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[HDF5]]
 deps = ["Blosc", "Compat", "HDF5_jll", "Libdl", "Mmap", "Random", "Requires"]
-git-tree-sha1 = "96d77533eb46e208e801b939db8a27626c166565"
+git-tree-sha1 = "8be8b31df938483ba2ab27f38a8bc91a9e43ae92"
 uuid = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
-version = "0.14.1"
+version = "0.14.3"
 
 [[HDF5_jll]]
 deps = ["Artifacts", "JLLWrappers", "LibCURL_jll", "Libdl", "OpenSSL_jll", "Pkg", "Zlib_jll"]
@@ -194,9 +194,9 @@ version = "1.0.0"
 
 [[JLD2]]
 deps = ["CodecZlib", "DataStructures", "MacroTools", "Mmap", "Pkg", "Printf", "Requires", "UUIDs"]
-git-tree-sha1 = "606f435dd9028f1e66819d4b09f104f8457667eb"
+git-tree-sha1 = "0fd0b0043cae454eed05bccd6dcfcdddc3f21f7e"
 uuid = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
-version = "0.3.0"
+version = "0.3.1"
 
 [[JLLWrappers]]
 git-tree-sha1 = "c70593677bbf2c3ccab4f7500d0f4dacfff7b75c"
@@ -292,9 +292,9 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[OnlineStats]]
 deps = ["AbstractTrees", "Dates", "LinearAlgebra", "OnlineStatsBase", "OrderedCollections", "Random", "RecipesBase", "Statistics", "StatsBase", "SweepOperator"]
-git-tree-sha1 = "bda80e1419f130bb47e57bf14ec1b45e0cce4c14"
+git-tree-sha1 = "a3d0e72ffde4f596cc148c4c6555e310dcd5b2ba"
 uuid = "a15396b6-48d5-5d58-9928-6d29437db91e"
-version = "1.5.7"
+version = "1.5.8"
 
 [[OnlineStatsBase]]
 deps = ["AbstractTrees", "Dates", "LinearAlgebra", "OrderedCollections", "Statistics", "StatsBase"]
@@ -321,15 +321,15 @@ version = "1.3.2"
 
 [[PackageCompiler]]
 deps = ["Libdl", "Pkg", "UUIDs"]
-git-tree-sha1 = "3eee77c94646163f15bd8626acf494360897f890"
+git-tree-sha1 = "0d51c12a249d4f1e590a8d592243c28849405a6f"
 uuid = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
-version = "1.2.3"
+version = "1.2.4"
 
 [[Parsers]]
 deps = ["Dates"]
-git-tree-sha1 = "b417be52e8be24e916e34b3d70ec2da7bdf56a68"
+git-tree-sha1 = "50c9a9ed8c714945e01cd53a21007ed3865ed714"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "1.0.12"
+version = "1.0.15"
 
 [[Pipe]]
 git-tree-sha1 = "6842804e7867b115ca9de748a0cf6b364523c16d"
@@ -423,9 +423,9 @@ version = "0.1.10"
 
 [[StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
-git-tree-sha1 = "da4cf579416c81994afd6322365d00916c79b8ae"
+git-tree-sha1 = "9da72ed50e94dbff92036da395275ed114e04d49"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "0.12.5"
+version = "1.0.1"
 
 [[Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -439,9 +439,9 @@ version = "0.33.2"
 
 [[StructTypes]]
 deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "1ed04f622a39d2e5a6747c3a70be040c00333933"
+git-tree-sha1 = "d94235fcdc4a09649f263365c5f7e4ed4ba6ed34"
 uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
-version = "1.1.0"
+version = "1.2.1"
 
 [[SweepOperator]]
 deps = ["LinearAlgebra"]
@@ -457,9 +457,9 @@ version = "1.0.0"
 
 [[Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "LinearAlgebra", "TableTraits", "Test"]
-git-tree-sha1 = "5131a624173d532299d1c7eb05341c18112b21b8"
+git-tree-sha1 = "240d19b8762006ff04b967bdd833269ad642d550"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.2.1"
+version = "1.2.2"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
