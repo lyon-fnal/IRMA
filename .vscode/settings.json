@@ -1,5 +1,5 @@
 {
-    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA/analyses/018_StrongScaling",
+    "julia.environmentPath": "/global/homes/l/lyon/IRMA/jobs/033_SharedMemory",
     "cSpell.words": [
         "Wtime",
         "isbits",
