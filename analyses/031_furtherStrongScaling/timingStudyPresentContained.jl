@@ -27,7 +27,7 @@ Wait for the notebook to load (when all of the wavy lines in the left margin dis
 
 You can also turn on "Presenter view" by pressing "Present" in the title slide below (presenter view adds vertical whitespace to separate the slides). Use the arrow buttons on the lower right of the window to advance through the slides or go back. Press the "Present" button again to exit presenter view. 
 
-You can see hidden code by clicking on the "slash-eye" in the left margin. Click again to re-hide. 
+You can see hidden code by mouse-over left margin and clicking on the "slash-eye" in the left margin. Click again to re-hide. 
 
 This notebook is live when viewed in *Binder*. UI elements (e.g. buttons, sliders, and selection menus) are active. Changing a cell will automatically execute dependent cells. 
 """
@@ -166,10 +166,13 @@ Things to try
 - I/O profiling (is `Darshan` worthwhile?)
 """
 
+# ╔═╡ 41dded24-4166-11eb-1504-397389af7fdc
+const tmpdir = mktempdir()
+
 # ╔═╡ d4242858-4162-11eb-3d77-d19a713873f8
 begin
 	import Pkg
-	Pkg.activate(mktempdir())
+	Pkg.activate(tmpdir)
 	Pkg.add([
 			"PlutoUI",
 			"JLD2",
@@ -189,9 +192,14 @@ with_terminal() do
 	Pkg.status()
 end
 
+# ╔═╡ b91426ea-4166-11eb-3cab-595321e04093
+# Download the self-contained data file
+download("https://github.com/lyon-fnal/IRMA/raw/lyon-fnal/issue31/analyses/031_furtherStrongScaling/timingStudyPresent.jld2",
+		     "/tmp/timingStudyPresent.jld2")
+
 # ╔═╡ 337b7892-40c3-11eb-020d-6de4898ac30a
 # Load the data
-@load "./timingStudyPresent.jld2"
+@load "/tmp/timingStudyPresent.jld2"
 
 # ╔═╡ ca561bd0-402a-11eb-1c33-7590b68c7437
 # Make plots for a group
@@ -311,10 +319,12 @@ plotMedianAndMax("total")
 # ╟─c0376d86-4028-11eb-25cc-298c16e79635
 # ╠═baffc404-402c-11eb-0b18-27f984b63ee1
 # ╠═34a2c458-4034-11eb-3ec3-434058547662
+# ╠═41dded24-4166-11eb-1504-397389af7fdc
 # ╠═d4242858-4162-11eb-3d77-d19a713873f8
 # ╠═d5cb4316-4028-11eb-340e-19e4116c4105
 # ╠═77adadb8-415d-11eb-0d7a-e343bc3104a9
 # ╠═79deea86-415d-11eb-2306-c7001421c314
+# ╠═b91426ea-4166-11eb-3cab-595321e04093
 # ╠═337b7892-40c3-11eb-020d-6de4898ac30a
 # ╠═ca561bd0-402a-11eb-1c33-7590b68c7437
 # ╠═ec2592a4-402a-11eb-2a94-6d7744e89b4f
