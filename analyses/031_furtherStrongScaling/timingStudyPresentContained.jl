@@ -13,17 +13,11 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ d5cb4316-4028-11eb-340e-19e4116c4105
-begin
-	using PlutoUI, JLD2, DataFrames, CategoricalArrays, Plots, StatsPlots
-	gr()
-end
-
 # ╔═╡ bfbb00b8-40e4-11eb-150f-d33ca0c49ed4
 md"""
 **Instructions:** 
 
-Wait for the notebook to load (when all of the wavy lines in the left margin disappear), then simply scroll through the notebook.
+Wait for the notebook to load (when all of the wavy lines in the left margin disappear). This can take awhile (minutes) as packages need to be downloaded. When complete, simply scroll through the notebook.
 
 You can also turn on "Presenter view" by pressing "Present" in the title slide below (presenter view adds vertical whitespace to separate the slides). Use the arrow buttons on the lower right of the window to advance through the slides or go back. Press the "Present" button again to exit presenter view. 
 
@@ -181,6 +175,9 @@ begin
 			"StatsPlots",
 			"Plots"
 			])
+	
+	using PlutoUI, JLD2, DataFrames, CategoricalArrays, Plots, StatsPlots
+	gr()
 end
 
 # ╔═╡ 77adadb8-415d-11eb-0d7a-e343bc3104a9
@@ -321,7 +318,6 @@ plotMedianAndMax("total")
 # ╠═34a2c458-4034-11eb-3ec3-434058547662
 # ╠═41dded24-4166-11eb-1504-397389af7fdc
 # ╠═d4242858-4162-11eb-3d77-d19a713873f8
-# ╠═d5cb4316-4028-11eb-340e-19e4116c4105
 # ╠═77adadb8-415d-11eb-0d7a-e343bc3104a9
 # ╠═79deea86-415d-11eb-2306-c7001421c314
 # ╠═b91426ea-4166-11eb-3cab-595321e04093

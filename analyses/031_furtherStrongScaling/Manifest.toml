@@ -81,15 +81,15 @@ uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
 version = "0.9.0"
 
 [[Chain]]
-git-tree-sha1 = "109b2f37e2837502374fb36a37e33c5a7cf01840"
+git-tree-sha1 = "647865f04cd7bd882db67a9497bc9de299b7557c"
 uuid = "8be319e6-bccf-4806-a6f7-6fae938471bc"
-version = "0.4.0"
+version = "0.4.1"
 
 [[ChainRulesCore]]
 deps = ["LinearAlgebra", "MuladdMacro", "SparseArrays"]
-git-tree-sha1 = "bd7db5cdb38fe787892fc7af2e006dac34e62ddd"
+git-tree-sha1 = "15081c431bb25848ad9b0d172a65794f3a3e197a"
 uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-version = "0.9.23"
+version = "0.9.24"
 
 [[Clustering]]
 deps = ["Distances", "LinearAlgebra", "NearestNeighbors", "Printf", "SparseArrays", "Statistics", "StatsBase"]
@@ -391,7 +391,7 @@ version = "0.8.19"
 
 [[IRMA]]
 deps = ["Distributed", "MPI", "OnlineStats", "OnlineStatsBase", "Pipe", "StaticArrays"]
-path = "/Users/lyon/Development/gm2/IRMA"
+path = "../.."
 uuid = "ce686792-a933-4d1d-b1a5-064b7fd99fb7"
 version = "0.1.0"
 
@@ -469,9 +469,9 @@ version = "2.0.1+3"
 
 [[JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "d4cbb4ccecfbcf2c475c28d186fd1b02479661eb"
+git-tree-sha1 = "2d968807abe8684acdb1c867fa68d2113a08637c"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.8.6"
+version = "0.8.7"
 
 [[JuliaVariables]]
 deps = ["MLStyle", "NameResolution"]
