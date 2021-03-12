@@ -1,6 +1,7 @@
 using MPI
 using HDF5
 using Test
+using Distributed: splitrange
 
 @testset "mpio" begin
 
@@ -25,13 +26,22 @@ let fileprop = create_property(HDF5.H5P_FILE_ACCESS)
 end
 
 # open file in parallel and write dataset
-fn = MPI.bcast("/global/cscratch1/sd/lyon/035_Darshan/foo.h5", 0, comm)
-A = [myrank + i for i = 1:10]
+fn = MPI.bcast("/global/cscratch1/sd/lyon/035_Darshan/foo2.h5", 0, comm)
+A = 1:100
+r = splitrange(1,100, nprocs)
+myr = r[myrank+1]
 h5open(fn, "w", comm, info) do f
     @test isopen(f)
     g = create_group(f, "mygroup")
-    dset = create_dataset(g, "B", datatype(Int64), dataspace(10, nprocs), chunk=(10, 1), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE)
-    dset[:, myrank + 1] = A
+    #dset = create_dataset(g, "B", datatype(Int64), ((10,),(-1,)), chunk=(2,), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE)
+    # Can't have extensible non-chunked DS
+    dset = create_dataset(g, "B", datatype(Int64), ((100,)), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE)
+    # Need to do the trick that I do in my concatenator of resizing
+    # @info "A"
+    # HDF5.set_extent_dims(dset, (100,))
+    # @info "B"
+    dset[myr] = A[myr]
+    @info "C"
 end
 
 #pv = (;)
@@ -52,7 +62,7 @@ h5open(fn; pv...) do f  # default: opened in read mode, with default MPI.Info()
     @show B
     @test !isempty(B)
     @show size(B)
-    @test A == vec(B[:, myrank + 1])   # This line makes a collective read
+    @test A[myr] == B[myr]   # This line makes a collective read
 end
 
 # The below won't show up in MPI-IO in darshan since it's not opened with MPIO

@@ -14,7 +14,7 @@ date +"Time_before %s"
                 #    -n 200000 \
             #  -J energyByCal.so \
 
-srun --export=ALL,LD_PRELOAD=libdarshan.so julia  --project=. tryit.jl
+srun --export=ALL,LD_PRELOAD=libdarshan.so julia  --project=. mpio2.jl
 
 date +"Time_after %s"
 date

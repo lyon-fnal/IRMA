@@ -12,8 +12,9 @@
 # [] no trace
 # [] no -n
 # [] Check -J
-# [] Correct Julia program
+# [] Correct Julia script
 # [] Notes
+# [] OutPrefix
 # [] Input file
 
 module list
@@ -31,10 +32,11 @@ date +"Time_before %s"
             #  --trace-compile=energyByCal_precompile.jl \
                 #    -n 200000 \
             #  -J energyByCal.so \
+            # HDF5_DEBUG=trace ? Doesn't seeem to work
 
-srun  --export=ALL,LD_PRELOAD=libdarshan.so \
-        julia --project=. energyByCal.jl \
-            --notes="darshan" -n 200000 --collective \
+srun    --export=ALL,LD_PRELOAD=libdarshan.so \
+        julia --project=. -J energyByCal.so energyByCal.jl \
+            --notes="compiled,collective,darshan" --collective \
             $CSCRATCH/irmaData2/merged_striped_large/irmaData_2C_merged.h5 $OUTDIR
 
 date +"Time_after %s"

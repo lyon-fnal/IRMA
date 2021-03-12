@@ -1,0 +1,3 @@
+#!/bin/bash
+
+darshan-parser $1 | egrep "MPIIO_(INDEP|COLL)"

@@ -77,53 +77,38 @@ function main()
 
     stamp(sw, "inMain")
 
-    parsed_args = parse_commandLine()
-    fileName  = parsed_args["inFile"]
-    outPath   = parsed_args["outPath"]
-    nrows     = parsed_args["nrows"]
-    notes     = parsed_args["notes"]
-    do_mpio   = parsed_args["collective"]
-    outPrefix = parsed_args["outPrefix"]
+    parsed_args  = parse_commandLine()
+    fileName     = parsed_args["inFile"]
+    outPath      = parsed_args["outPath"]
+    nrows        = parsed_args["nrows"]
+    notes        = parsed_args["notes"]
+    collective   = parsed_args["collective"]
+    outPrefix    = parsed_args["outPrefix"]
 
-    if do_mpio
-        @info "Collective MPI-IO is on"
-        let fileprop = create_property(HDF5.H5P_FILE_ACCESS)
-            HDF5.h5p_set_fapl_mpio(fileprop, comm, info)   # fapl is the file access property list
-            h5comm, h5info = HDF5.h5p_get_fapl_mpio(fileprop)
+    let fileprop = create_property(HDF5.H5P_FILE_ACCESS)
+        HDF5.h5p_set_fapl_mpio(fileprop, comm, info)   # fapl is the file access property list
+        h5comm, h5info = HDF5.h5p_get_fapl_mpio(fileprop)
 
-            @assert MPI.Comm_compare(comm, h5comm) == MPI.CONGRUENT
-        end
+        @assert MPI.Comm_compare(comm, h5comm) === MPI.CONGRUENT
     end
 
-    my_h5open(f::Function, fname::String) = begin
-        if do_mpio
-            @info "h5open collective"
-            return h5open(f, fname, "r", comm, info, dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE)
-        else
-            @info "h5open non-collective"
-            return h5open(f, fname, "r")
-        end
+    if collective
+        pv = (; fapl_mpio=(comm, info), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE)
+    else
+        pv = (; fapl_mpio=(comm, info), dxpl_mpio=HDF5.H5FD_MPIO_INDEPENDENT)
     end
+
+    @info "MPI_IO collective state is $pv"
 
     stamp(sw, "beforeOpen")
     # Open the file
-    my_h5open(fileName) do f
+    h5open(fileName, "r"; pv...) do f
         stamp(sw, "openedFile")
 
-        # open the datasets
-        if do_mpio
-            # I think I need to switch to explicit h5reads to get real collective reads
-            # see https://github.com/JuliaIO/HDF5.jl/blob/aafbeafd916d0ab96eab36035cc6d156245d9223/test/mpio.jl#L58
-            @info "h5get collective"
-            energyDS = f["/ReconEastClusters/energy",    fapl_mpio=(comm, info), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
-            timeDS   = f["/ReconEastClusters/time",      fapl_mpio=(comm, info), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
-            caloDS   = f["/ReconEastClusters/caloIndex", fapl_mpio=(comm, info), dxpl_mpio=HDF5.H5FD_MPIO_COLLECTIVE]
-        else
-            @info "h5get nonm-collective"
-            energyDS = f["/ReconEastClusters/energy"]
-            timeDS   = f["/ReconEastClusters/time"]
-            caloDS   = f["/ReconEastClusters/caloIndex"]
-        end
+        # Open the datasets
+        energyDS = getindex(f,"/ReconEastClusters/energy"; pv...)
+        timeDS   = getindex(f,"/ReconEastClusters/time"; pv...)
+        caloDS   = getindex(f,"/ReconEastClusters/caloIndex"; pv...)
         stamp(sw, "openedDataSet")
 
         # How many rows to process? We can override with the NALLROWS environment variable
