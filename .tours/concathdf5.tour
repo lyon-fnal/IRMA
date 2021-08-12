@@ -1,0 +1,36 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "concatHDF5",
+  "steps": [
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "There are lots of options to set.",
+      "line": 192
+    },
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "Only the ranks that are roots on their node participate",
+      "line": 129
+    },
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "Determine how much memory is on this node and share it with the other ranks. ",
+      "line": 133
+    },
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "Loop over the datasets",
+      "line": 140
+    },
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "Determine how many rows from this dataset will fit on this node. This is determined by the minimum of the dataset size (number of rows) and the amount of rows the memory can handle (`memoryLeft \\div sizeOfRow`). This is the number of rows that will fit on this node. If there are more rows to fit, then we'll need to look at the next node. ",
+      "line": 147
+    },
+    {
+      "file": "jobs/036_Concatenator/concatHDF5.jl",
+      "description": "If we are able to fit rows on this node, then reduce the memory available accordingly.\nNow add an entry to `nodeMemoryLayout`. If we don't have an entry for this node, make a blank one. Determine the starting and ending row index numbers and put that into the `nodeMemoryLayout`. Update the `startingRow` accordingly.",
+      "line": 151
+    }
+  ]
+}

@@ -1,0 +1,892 @@
+# darshan log version: 3.21
+# compression method: ZLIB
+# exe: /global/homes/l/lyon/julia-1.5.3/bin/julia --project=. -J energyByCal.so energyByCal.jl --notes=darshan,collective --collective --outPrefix=Collective /global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5 /global/cscratch1/sd/lyon/035_Darshan 
+# uid: 75773
+# jobid: 38213496
+# start_time: 1611383510
+# start_time_asci: Fri Jan 22 22:31:50 2021
+# end_time: 1611383686
+# end_time_asci: Fri Jan 22 22:34:46 2021
+# nprocs: 50
+# run time: 177
+# metadata: lib_ver = 3.2.1
+# metadata: h = romio_no_indep_rw=true;cb_nodes=4
+
+# log file regions
+# -------------------------------------------------------
+# header: 360 bytes (uncompressed)
+# job data: 655 bytes (compressed)
+# record table: 247 bytes (compressed)
+# POSIX module: 443 bytes (compressed), ver=4
+# MPI-IO module: 185 bytes (compressed), ver=3
+# H5F module: 56 bytes (compressed), ver=3
+# H5D module: 330 bytes (compressed), ver=1
+# LUSTRE module: 49 bytes (compressed), ver=1
+# DXT_POSIX module: 3623029 bytes (compressed), ver=1
+# DXT_MPIIO module: 3624576 bytes (compressed), ver=2
+
+# mounted file systems (mount point and fs type)
+# -------------------------------------------------------
+# mount entry:	/var/opt/cray/imps-image-binding/PE_x86_64/squash_mounts/squashfs_7By_jn_mount_point/opt/cray/pe/modulefiles/craype/.version	overlay
+# mount entry:	/var/opt/cray/imps-image-binding/PE_x86_64/squash_mounts/squashfs_7By_jn_mount_point	squashfs
+# mount entry:	/var/opt/cray/imps-distribution/squash/mounts/cle.cori.cle7.0.up01.20210120111514	squashfs
+# mount entry:	/var/opt/cray/imps-distribution/squash/mounts/global	squashfs
+# mount entry:	/opt/cray/pe/modulefiles/craype/.version	overlay
+# mount entry:	/var/opt/cray/imps-distribution/source	autofs
+# mount entry:	/global/project/projectdirs	dvs
+# mount entry:	/sys/kernel/debug/tracing	tracefs
+# mount entry:	/var/opt/cray/alps/spool	devtmpfs
+# mount entry:	/sys/fs/cgroup/unified	cgroup2
+# mount entry:	/sys/kernel/config	configfs
+# mount entry:	/var/opt/cray/imps	dvs
+# mount entry:	/.rootfs_lower_ro	squashfs
+# mount entry:	/global/cscratch1	lustre
+# mount entry:	/global/projectb	dvs
+# mount entry:	/etc/opt/cray/pe	squashfs
+# mount entry:	/usr/sbin/ibstat	overlay
+# mount entry:	/usr/local/lmod	squashfs
+# mount entry:	/usr/share/lmod	squashfs
+# mount entry:	/sys/fs/pstore	pstore
+# mount entry:	/global/syscom	dvs
+# mount entry:	/global/common	dvs
+# mount entry:	/opt/admin-pe	squashfs
+# mount entry:	/opt/jemalloc	squashfs
+# mount entry:	/etc/dat.conf	overlay
+# mount entry:	/opt/cray/pe	squashfs
+# mount entry:	/dev/mqueue	mqueue
+# mount entry:	/global/dna	dvs
+# mount entry:	/global/cfs	dvs
+# mount entry:	/opt/python	squashfs
+# mount entry:	/opt/nvidia	squashfs
+# mount entry:	/cray_home	dvs
+# mount entry:	/global/u1	dvs
+# mount entry:	/global/u2	dvs
+# mount entry:	/opt/intel	squashfs
+# mount entry:	/opt/gcc	squashfs
+# mount entry:	/nersc	dvs
+# mount entry:	/cvmfs	dvs
+# mount entry:	/opt/R	squashfs
+# mount entry:	/dev	devtmpfs
+# mount entry:	/	overlay
+
+# description of columns:
+#   <module>: module responsible for this I/O record.
+#   <rank>: MPI rank.  -1 indicates that the file is shared
+#      across all processes and statistics are aggregated.
+#   <record id>: hash of the record's file path
+#   <counter name> and <counter value>: statistical counters.
+#      A value of -1 indicates that Darshan could not monitor
+#      that counter, and its value should be ignored.
+#   <file name>: full file path for the record.
+#   <mount pt>: mount point that the file resides on.
+#   <fs type>: type of file system that the file resides on.
+
+# *******************************************************
+# POSIX module data
+# *******************************************************
+
+# description of POSIX counters:
+#   POSIX_*: posix operation counts.
+#   READS,WRITES,OPENS,SEEKS,STATS,MMAPS,SYNCS,FILENOS,DUPS are types of operations.
+#   POSIX_RENAME_SOURCES/TARGETS: total count file was source or target of a rename operation
+#   POSIX_RENAMED_FROM: Darshan record ID of the first rename source, if file was a rename target
+#   POSIX_MODE: mode that file was opened in.
+#   POSIX_BYTES_*: total bytes read and written.
+#   POSIX_MAX_BYTE_*: highest offset byte read and written.
+#   POSIX_CONSEC_*: number of exactly adjacent reads and writes.
+#   POSIX_SEQ_*: number of reads and writes from increasing offsets.
+#   POSIX_RW_SWITCHES: number of times access alternated between read and write.
+#   POSIX_*_ALIGNMENT: memory and file alignment.
+#   POSIX_*_NOT_ALIGNED: number of reads and writes that were not aligned.
+#   POSIX_MAX_*_TIME_SIZE: size of the slowest read and write operations.
+#   POSIX_SIZE_*_*: histogram of read and write access sizes.
+#   POSIX_STRIDE*_STRIDE: the four most common strides detected.
+#   POSIX_STRIDE*_COUNT: count of the four most common strides.
+#   POSIX_ACCESS*_ACCESS: the four most common access sizes.
+#   POSIX_ACCESS*_COUNT: count of the four most common access sizes.
+#   POSIX_*_RANK: rank of the processes that were the fastest and slowest at I/O (for shared files).
+#   POSIX_*_RANK_BYTES: bytes transferred by the fastest and slowest ranks (for shared files).
+#   POSIX_F_*_START_TIMESTAMP: timestamp of first open/read/write/close.
+#   POSIX_F_*_END_TIMESTAMP: timestamp of last open/read/write/close.
+#   POSIX_F_READ/WRITE/META_TIME: cumulative time spent in read, write, or metadata operations.
+#   POSIX_F_MAX_*_TIME: duration of the slowest read and write operations.
+#   POSIX_F_*_RANK_TIME: fastest and slowest I/O time for a single rank (for shared files).
+#   POSIX_F_VARIANCE_RANK_*: variance of total I/O time and bytes moved for all ranks (for shared files).
+
+# WARNING: POSIX_OPENS counter includes both POSIX_FILENOS and POSIX_DUPS counts
+
+# WARNING: POSIX counters related to file offsets may be incorrect if a file is simultaneously accessed by both POSIX and STDIO (e.g., using fileno())
+# 	- Affected counters include: MAX_BYTE_{READ|WRITTEN}, CONSEC_{READS|WRITES}, SEQ_{READS|WRITES}, {MEM|FILE}_NOT_ALIGNED, STRIDE*_STRIDE
+
+#<module>	<rank>	<record id>	<counter>	<value>	<file name>	<mount pt>	<fs type>
+POSIX	0	10272178177345103378	POSIX_OPENS	1	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FILENOS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_DUPS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_READS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_WRITES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SEEKS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STATS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MMAPS	-1	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FSYNCS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FDSYNCS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_RENAME_SOURCES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_RENAME_TARGETS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_RENAMED_FROM	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MODE	438	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_BYTES_READ	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MAX_BYTE_READ	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MAX_BYTE_WRITTEN	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_CONSEC_READS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_CONSEC_WRITES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SEQ_READS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SEQ_WRITES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_RW_SWITCHES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MEM_NOT_ALIGNED	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MEM_ALIGNMENT	8	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FILE_NOT_ALIGNED	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FILE_ALIGNMENT	1048576	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MAX_READ_TIME_SIZE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_0_100	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_100_1K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_1K_10K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_10K_100K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_100K_1M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_1M_4M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_4M_10M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_10M_100M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_100M_1G	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_READ_1G_PLUS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_0_100	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_100_1K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_1K_10K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_10K_100K	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_100K_1M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_1M_4M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_4M_10M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_10M_100M	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_100M_1G	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SIZE_WRITE_1G_PLUS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE1_STRIDE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE2_STRIDE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE3_STRIDE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE4_STRIDE	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE1_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE2_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE3_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_STRIDE4_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS1_ACCESS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS2_ACCESS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS3_ACCESS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS4_ACCESS	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS1_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS2_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS3_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_ACCESS4_COUNT	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FASTEST_RANK	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_FASTEST_RANK_BYTES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SLOWEST_RANK	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_SLOWEST_RANK_BYTES	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_OPEN_START_TIMESTAMP	174.071860	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_READ_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_CLOSE_START_TIMESTAMP	175.085918	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_OPEN_END_TIMESTAMP	174.078591	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_READ_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_CLOSE_END_TIMESTAMP	175.086079	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_READ_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_META_TIME	0.006892	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_MAX_READ_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_FASTEST_RANK_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_SLOWEST_RANK_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_VARIANCE_RANK_TIME	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	0	10272178177345103378	POSIX_F_VARIANCE_RANK_BYTES	0.000000	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_OPENS	101	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FILENOS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_DUPS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_READS	268099	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SEEKS	35081	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STATS	51	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MMAPS	-1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FSYNCS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FDSYNCS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_RENAME_SOURCES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_RENAME_TARGETS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_RENAMED_FROM	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MODE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_BYTES_READ	140390876006	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MAX_BYTE_READ	305200440220	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MAX_BYTE_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_CONSEC_READS	232969	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_CONSEC_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SEQ_READS	252905	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SEQ_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_RW_SWITCHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MEM_NOT_ALIGNED	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MEM_ALIGNMENT	8	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FILE_NOT_ALIGNED	268047	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FILE_ALIGNMENT	1048576	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MAX_READ_TIME_SIZE	2096	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_0_100	154	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_100_1K	351	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_1K_10K	92616	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_100K_1M	174978	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_READ_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SIZE_WRITE_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE1_STRIDE	59223	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE2_STRIDE	61319	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE3_STRIDE	251404581029	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE4_STRIDE	228359013346	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE1_COUNT	2345	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE2_COUNT	37	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE3_COUNT	2	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_STRIDE4_COUNT	2	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS1_ACCESS	2096	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS2_ACCESS	512	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS3_ACCESS	850069	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS4_ACCESS	849369	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS1_COUNT	5127	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS2_COUNT	301	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS3_COUNT	5	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_ACCESS4_COUNT	5	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FASTEST_RANK	11	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_FASTEST_RANK_BYTES	2808147923	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SLOWEST_RANK	9	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_SLOWEST_RANK_BYTES	2806616632	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_OPEN_START_TIMESTAMP	2.673322	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_READ_START_TIMESTAMP	2.673802	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_CLOSE_START_TIMESTAMP	2.683028	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_OPEN_END_TIMESTAMP	2.703962	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_READ_END_TIMESTAMP	118.104540	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_CLOSE_END_TIMESTAMP	175.087045	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_READ_TIME	4097.457815	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_META_TIME	0.520132	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_MAX_READ_TIME	3.353264	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_FASTEST_RANK_TIME	63.720357	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_SLOWEST_RANK_TIME	94.917382	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_VARIANCE_RANK_TIME	60.253571	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	3224780862054254955	POSIX_F_VARIANCE_RANK_BYTES	432392134931.877869	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+POSIX	-1	4665658846043209358	POSIX_OPENS	250	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FILENOS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_DUPS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_READS	250	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_WRITES	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SEEKS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STATS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MMAPS	-1	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FSYNCS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FDSYNCS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_RENAME_SOURCES	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_RENAME_TARGETS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_RENAMED_FROM	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MODE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_BYTES_READ	124500	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_BYTES_WRITTEN	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MAX_BYTE_READ	497	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MAX_BYTE_WRITTEN	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_CONSEC_READS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_CONSEC_WRITES	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SEQ_READS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SEQ_WRITES	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_RW_SWITCHES	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MEM_NOT_ALIGNED	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MEM_ALIGNMENT	8	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FILE_NOT_ALIGNED	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FILE_ALIGNMENT	131072	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MAX_READ_TIME_SIZE	498	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_MAX_WRITE_TIME_SIZE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_0_100	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_100_1K	250	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_1K_10K	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_10K_100K	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_100K_1M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_1M_4M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_4M_10M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_10M_100M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_100M_1G	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_READ_1G_PLUS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_0_100	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_100_1K	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_1K_10K	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_10K_100K	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_100K_1M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_1M_4M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_4M_10M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_10M_100M	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_100M_1G	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SIZE_WRITE_1G_PLUS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE1_STRIDE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE2_STRIDE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE3_STRIDE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE4_STRIDE	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE1_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE2_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE3_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_STRIDE4_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS1_ACCESS	498	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS2_ACCESS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS3_ACCESS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS4_ACCESS	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS1_COUNT	250	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS2_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS3_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_ACCESS4_COUNT	0	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FASTEST_RANK	45	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_FASTEST_RANK_BYTES	2490	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SLOWEST_RANK	14	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_SLOWEST_RANK_BYTES	2490	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_OPEN_START_TIMESTAMP	0.008203	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_READ_START_TIMESTAMP	0.009718	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_WRITE_START_TIMESTAMP	0.000000	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_CLOSE_START_TIMESTAMP	0.010130	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_OPEN_END_TIMESTAMP	1.156860	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_READ_END_TIMESTAMP	1.157498	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_WRITE_END_TIMESTAMP	0.000000	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_CLOSE_END_TIMESTAMP	1.157561	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_READ_TIME	0.082743	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_WRITE_TIME	0.000000	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_META_TIME	0.151115	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_MAX_READ_TIME	0.002376	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_MAX_WRITE_TIME	0.000000	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_FASTEST_RANK_TIME	0.002121	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_SLOWEST_RANK_TIME	0.007573	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_VARIANCE_RANK_TIME	0.000001	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+POSIX	-1	4665658846043209358	POSIX_F_VARIANCE_RANK_BYTES	0.000000	/global/u2/l/lyon/IRMA/jobs/035_Darshan/Project.toml	/global/u2	dvs
+
+# *******************************************************
+# MPI-IO module data
+# *******************************************************
+
+# description of MPIIO counters:
+#   MPIIO_INDEP_*: MPI independent operation counts.
+#   MPIIO_COLL_*: MPI collective operation counts.
+#   MPIIO_SPLIT_*: MPI split collective operation counts.
+#   MPIIO_NB_*: MPI non blocking operation counts.
+#   READS,WRITES,and OPENS are types of operations.
+#   MPIIO_SYNCS: MPI file sync operation counts.
+#   MPIIO_HINTS: number of times MPI hints were used.
+#   MPIIO_VIEWS: number of times MPI file views were used.
+#   MPIIO_MODE: MPI-IO access mode that file was opened with.
+#   MPIIO_BYTES_*: total bytes read and written at MPI-IO layer.
+#   MPIIO_RW_SWITCHES: number of times access alternated between read and write.
+#   MPIIO_MAX_*_TIME_SIZE: size of the slowest read and write operations.
+#   MPIIO_SIZE_*_AGG_*: histogram of MPI datatype total sizes for read and write operations.
+#   MPIIO_ACCESS*_ACCESS: the four most common total access sizes.
+#   MPIIO_ACCESS*_COUNT: count of the four most common total access sizes.
+#   MPIIO_*_RANK: rank of the processes that were the fastest and slowest at I/O (for shared files).
+#   MPIIO_*_RANK_BYTES: total bytes transferred at MPI-IO layer by the fastest and slowest ranks (for shared files).
+#   MPIIO_F_*_START_TIMESTAMP: timestamp of first MPI-IO open/read/write/close.
+#   MPIIO_F_*_END_TIMESTAMP: timestamp of last MPI-IO open/read/write/close.
+#   MPIIO_F_READ/WRITE/META_TIME: cumulative time spent in MPI-IO read, write, or metadata operations.
+#   MPIIO_F_MAX_*_TIME: duration of the slowest MPI-IO read and write operations.
+#   MPIIO_F_*_RANK_TIME: fastest and slowest I/O time for a single rank (for shared files).
+#   MPIIO_F_VARIANCE_RANK_*: variance of total I/O time and bytes moved for all ranks (for shared files).
+
+#<module>	<rank>	<record id>	<counter>	<value>	<file name>	<mount pt>	<fs type>
+MPI-IO	-1	3224780862054254955	MPIIO_INDEP_OPENS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_COLL_OPENS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_INDEP_READS	268049	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_INDEP_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_COLL_READS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_COLL_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SPLIT_READS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SPLIT_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_NB_READS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_NB_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SYNCS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_HINTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_VIEWS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_MODE	2	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_BYTES_READ	140390875606	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_RW_SWITCHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_MAX_READ_TIME_SIZE	2096	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_0_100	104	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_100_1K	351	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_1K_10K	92616	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_100K_1M	174978	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_READ_AGG_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SIZE_WRITE_AGG_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS1_ACCESS	2096	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS2_ACCESS	512	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS3_ACCESS	850069	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS4_ACCESS	849369	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS1_COUNT	5127	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS2_COUNT	301	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS3_COUNT	5	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_ACCESS4_COUNT	5	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_FASTEST_RANK	11	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_FASTEST_RANK_BYTES	2808147915	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SLOWEST_RANK	9	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_SLOWEST_RANK_BYTES	2806616624	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_OPEN_START_TIMESTAMP	2.699996	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_READ_START_TIMESTAMP	2.704434	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_CLOSE_START_TIMESTAMP	173.052514	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_OPEN_END_TIMESTAMP	2.704010	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_READ_END_TIMESTAMP	118.104550	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_CLOSE_END_TIMESTAMP	175.087107	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_READ_TIME	4098.341886	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_META_TIME	55.891412	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_MAX_READ_TIME	3.353279	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_FASTEST_RANK_TIME	64.810746	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_SLOWEST_RANK_TIME	95.958727	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_VARIANCE_RANK_TIME	59.952796	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+MPI-IO	-1	3224780862054254955	MPIIO_F_VARIANCE_RANK_BYTES	432392134931.877869	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+
+# *******************************************************
+# H5F module data
+# *******************************************************
+
+# description of HDF5 counters:
+#   H5F_OPENS: HDF5 file open/create operation counts.
+#   H5F_FLUSHES: HDF5 file flush operation counts.
+#   H5F_USE_MPIIO: flag indicating whether MPI-IO was used to access this file.
+#   H5F_F_*_START_TIMESTAMP: timestamp of first HDF5 file open/close.
+#   H5F_F_*_END_TIMESTAMP: timestamp of last HDF5 file open/close.
+#   H5F_F_META_TIME: cumulative time spent in HDF5 metadata operations.
+
+#<module>	<rank>	<record id>	<counter>	<value>	<file name>	<mount pt>	<fs type>
+H5F	-1	3224780862054254955	H5F_OPENS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_FLUSHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_USE_MPIIO	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_F_OPEN_START_TIMESTAMP	2.683079	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_F_CLOSE_START_TIMESTAMP	173.052202	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_F_OPEN_END_TIMESTAMP	2.704684	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_F_CLOSE_END_TIMESTAMP	175.087132	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+H5F	-1	3224780862054254955	H5F_F_META_TIME	56.549637	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+
+# *******************************************************
+# H5D module data
+# *******************************************************
+
+# description of HDF5 counters:
+#   H5D_OPENS: HDF5 dataset open/create operation counts.
+#   H5D_READS: HDF5 dataset read operation counts.
+#   H5D_WRITES: HDF5 dataset write operation counts.
+#   H5D_FLUSHES: HDF5 dataset flush operation counts.
+#   H5D_BYTES_*: total bytes read and written at HDF5 dataset layer.
+#   H5D_RW_SWITCHES: number of times access alternated between read and write.
+#   H5D_*_SELECTS: number of different access selections (regular/irregular hyperslab or points).
+#   H5D_MAX_*_TIME_SIZE: size of the slowest read and write operations.
+#   H5D_SIZE_*_AGG_*: histogram of H5D total access sizes for read and write operations.
+#   H5D_ACCESS*_*: the four most common total accesses, in terms of size and length/stride (in last 5 dimensions).
+#   H5D_ACCESS*_COUNT: count of the four most common total access sizes.
+#   H5D_DATASPACE_NDIMS: number of dimensions in dataset's dataspace.
+#   H5D_DATASPACE_NPOINTS: number of points in dataset's dataspace.
+#   H5D_DATATYPE_SIZE: size of each dataset element.
+#   H5D_CHUNK_SIZE_D*: chunk size in last 5 dimensions of dataset.
+#   H5D_USE_MPIIO_COLLECTIVE: flag indicating whether MPI-IO collectives were used to access this dataset.
+#   H5D_USE_DEPRECATED: flag indicating whether deprecated H5D calls were used.
+#   H5D_*_RANK: rank of the processes that were the fastest and slowest at I/O (for shared datasets).
+#   H5D_*_RANK_BYTES: total bytes transferred at H5D layer by the fastest and slowest ranks (for shared datasets).
+#   H5D_F_*_START_TIMESTAMP: timestamp of first HDF5 dataset open/read/write/close.
+#   H5D_F_*_END_TIMESTAMP: timestamp of last HDF5 datset open/read/write/close.
+#   H5D_F_READ/WRITE/META_TIME: cumulative time spent in H5D read, write, or metadata operations.
+#   H5D_F_MAX_*_TIME: duration of the slowest H5D read and write operations.
+#   H5D_F_*_RANK_TIME: fastest and slowest I/O time for a single rank (for shared datasets).
+#   H5D_F_VARIANCE_RANK_*: variance of total I/O time and bytes moved for all ranks (for shared datasets).
+
+#<module>	<rank>	<record id>	<counter>	<value>	<file name>	<mount pt>	<fs type>
+H5D	-1	1694762891941815593	H5D_OPENS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_READS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_FLUSHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_BYTES_READ	91687059160	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_RW_SWITCHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_REGULAR_HYPERSLAB_SELECTS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_IRREGULAR_HYPERSLAB_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_POINT_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_MAX_READ_TIME_SIZE	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_READ_AGG_1G_PLUS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SIZE_WRITE_AGG_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS1_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS2_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS3_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_ACCESS4_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_DATASPACE_NDIMS	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_DATASPACE_NPOINTS	22921764790	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_DATATYPE_SIZE	4	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_CHUNK_SIZE_D1	262144	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_CHUNK_SIZE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_CHUNK_SIZE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_CHUNK_SIZE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_CHUNK_SIZE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_USE_MPIIO_COLLECTIVE	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_USE_DEPRECATED	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_FASTEST_RANK	46	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_FASTEST_RANK_BYTES	1833741180	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SLOWEST_RANK	31	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_SLOWEST_RANK_BYTES	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_OPEN_START_TIMESTAMP	3.114163	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_READ_START_TIMESTAMP	39.487963	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_CLOSE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_OPEN_END_TIMESTAMP	3.371624	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_READ_END_TIMESTAMP	109.007712	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_CLOSE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_READ_TIME	2500.125196	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_META_TIME	0.001310	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_MAX_READ_TIME	63.660119	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_FASTEST_RANK_TIME	35.232261	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_SLOWEST_RANK_TIME	63.660145	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_VARIANCE_RANK_TIME	27.121376	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	1694762891941815593	H5D_F_VARIANCE_RANK_BYTES	2.560000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/time	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_OPENS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_READS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_FLUSHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_BYTES_READ	91687059160	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_RW_SWITCHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_REGULAR_HYPERSLAB_SELECTS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_IRREGULAR_HYPERSLAB_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_POINT_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_MAX_READ_TIME_SIZE	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_READ_AGG_1G_PLUS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SIZE_WRITE_AGG_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS1_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS2_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS3_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_ACCESS4_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_DATASPACE_NDIMS	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_DATASPACE_NPOINTS	22921764790	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_DATATYPE_SIZE	4	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_CHUNK_SIZE_D1	262144	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_CHUNK_SIZE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_CHUNK_SIZE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_CHUNK_SIZE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_CHUNK_SIZE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_USE_MPIIO_COLLECTIVE	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_USE_DEPRECATED	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_FASTEST_RANK	31	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_FASTEST_RANK_BYTES	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SLOWEST_RANK	8	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_SLOWEST_RANK_BYTES	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_OPEN_START_TIMESTAMP	3.113959	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_READ_START_TIMESTAMP	3.207980	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_CLOSE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_OPEN_END_TIMESTAMP	3.371432	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_READ_END_TIMESTAMP	57.872081	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_CLOSE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_READ_TIME	2423.013635	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_META_TIME	0.001961	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_MAX_READ_TIME	54.656367	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_FASTEST_RANK_TIME	36.159905	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_SLOWEST_RANK_TIME	54.656402	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_VARIANCE_RANK_TIME	16.056869	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	5304614590818761025	H5D_F_VARIANCE_RANK_BYTES	2.560000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/energy	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_OPENS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_READS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_WRITES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_FLUSHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_BYTES_READ	91687059160	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_BYTES_WRITTEN	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_RW_SWITCHES	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_REGULAR_HYPERSLAB_SELECTS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_IRREGULAR_HYPERSLAB_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_POINT_SELECTS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_MAX_READ_TIME_SIZE	1833741180	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_MAX_WRITE_TIME_SIZE	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_READ_AGG_1G_PLUS	50	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_0_100	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_100_1K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_1K_10K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_10K_100K	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_100K_1M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_1M_4M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_4M_10M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_10M_100M	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_100M_1G	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SIZE_WRITE_AGG_1G_PLUS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_ACCESS	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_LENGTH_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_LENGTH_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_LENGTH_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_LENGTH_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_LENGTH_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_STRIDE_D1	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_STRIDE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_STRIDE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_STRIDE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_STRIDE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS1_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS2_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS3_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_ACCESS4_COUNT	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_DATASPACE_NDIMS	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_DATASPACE_NPOINTS	22921764790	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_DATATYPE_SIZE	4	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_CHUNK_SIZE_D1	262144	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_CHUNK_SIZE_D2	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_CHUNK_SIZE_D3	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_CHUNK_SIZE_D4	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_CHUNK_SIZE_D5	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_USE_MPIIO_COLLECTIVE	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_USE_DEPRECATED	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_FASTEST_RANK	9	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_FASTEST_RANK_BYTES	1833741184	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SLOWEST_RANK	46	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_SLOWEST_RANK_BYTES	1833741180	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_OPEN_START_TIMESTAMP	3.114289	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_READ_START_TIMESTAMP	87.294788	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_WRITE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_CLOSE_START_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_OPEN_END_TIMESTAMP	3.371752	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_READ_END_TIMESTAMP	118.166575	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_WRITE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_CLOSE_END_TIMESTAMP	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_READ_TIME	777.040221	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_META_TIME	0.001269	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_MAX_READ_TIME	29.771458	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_MAX_WRITE_TIME	0.000000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_FASTEST_RANK_TIME	8.709373	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_SLOWEST_RANK_TIME	29.771484	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_VARIANCE_RANK_TIME	27.056215	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+H5D	-1	10070748547497230647	H5D_F_VARIANCE_RANK_BYTES	2.560000	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5://ReconEastClusters/caloIndex	/global/cscratch1	lustre
+
+# *******************************************************
+# LUSTRE module data
+# *******************************************************
+
+# description of LUSTRE counters:
+#   LUSTRE_OSTS: number of OSTs across the entire file system.
+#   LUSTRE_MDTS: number of MDTs across the entire file system.
+#   LUSTRE_STRIPE_OFFSET: OST ID offset specified when the file was created.
+#   LUSTRE_STRIPE_SIZE: stripe size for file in bytes.
+#   LUSTRE_STRIPE_WIDTH: number of OSTs over which the file is striped.
+#   LUSTRE_OST_ID_*: indices of OSTs over which the file is striped.
+
+#<module>	<rank>	<record id>	<counter>	<value>	<file name>	<mount pt>	<fs type>
+LUSTRE	0	10272178177345103378	LUSTRE_OSTS	248	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	0	10272178177345103378	LUSTRE_MDTS	7	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	0	10272178177345103378	LUSTRE_STRIPE_OFFSET	0	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	0	10272178177345103378	LUSTRE_STRIPE_SIZE	1048576	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	0	10272178177345103378	LUSTRE_STRIPE_WIDTH	1	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	0	10272178177345103378	LUSTRE_OST_ID_0	230	/global/cscratch1/sd/lyon/035_Darshan/histosCollective_5x10.jld2	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_OSTS	248	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_MDTS	7	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_STRIPE_OFFSET	0	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_STRIPE_SIZE	1048576	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_STRIPE_WIDTH	1	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
+LUSTRE	-1	3224780862054254955	LUSTRE_OST_ID_0	41	/global/cscratch1/sd/lyon/irmaData2/merged_striped_large/irmaData_2C_merged.h5	/global/cscratch1	lustre
