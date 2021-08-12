@@ -1,6 +1,6 @@
 # Try MPI with Static histograms
 # Run with
-# mpiexec -n 4 julia SHistAndMPI.jl    
+# mpiexec -n 4 julia SHistAndMPI.jl
 
 using OnlineStats
 using IRMA

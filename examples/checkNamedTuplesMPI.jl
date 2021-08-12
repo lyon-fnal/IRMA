@@ -4,6 +4,7 @@ using MPI
 
 # -- MPI boilerplate --
 MPI.Init()
+using IRMA
 
 const info = MPI.Info()
 const comm = MPI.COMM_WORLD

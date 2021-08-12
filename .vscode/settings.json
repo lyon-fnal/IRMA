@@ -1,5 +1,4 @@
 {
-    "julia.environmentPath": "/Users/lyon/Development/gm2/IRMA/analyses/018_StrongScaling",
     "cSpell.words": [
         "Wtime",
         "isbits",
@@ -7,5 +6,6 @@
         "randn",
         "sherm",
         "splitrange"
-    ]
+    ],
+    "julia.environmentPath": "/global/homes/l/lyon/IRMA/examples"
 }
